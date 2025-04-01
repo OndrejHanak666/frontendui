@@ -4,9 +4,14 @@ import {
 } from "react-router-dom";
   
 import { UserRouterSegment } from "@hrbolek/uoisfrontend-ug2";
+import { PlanPage } from "../../../packages/subject_plan/src/plan/Pages/PlanPage";
 
 export const Routes = [
-    UserRouterSegment
+    //UserRouterSegment
+    {
+        path:"/hello/:id",
+        element: <PlanPage/>,
+    }
 ]
 
 // const router = createBrowserRouter(Routes, {basename: "/ug"});

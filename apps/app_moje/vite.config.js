@@ -48,6 +48,7 @@ export default defineConfig({
       "@hrbolek/uoisfrontend-granting": path.resolve(__dirname, "../../packages/granting/src"),
       "@hrbolek/uoisfrontend-admissions": path.resolve(__dirname, "../../packages/admissions/src"),
       "@hrbolek/uoisfrontend-requests": path.resolve(__dirname, "../../packages/requests/src"),
+      "@hanak/uoisfrontend-subject_plan": path.resolve(__dirname, "../../packages/subject_plan/src"),   // zmeneno
     },
   },
 
@@ -68,6 +69,7 @@ export default defineConfig({
       "@hrbolek/uoisfrontend-granting",
       "@hrbolek/uoisfrontend-admissions",
       "@hrbolek/uoisfrontend-requests",
+      "@hrbolek/uoisfrontend-package_moje",   // zmeneno
     ],
   },
 
@@ -76,7 +78,7 @@ export default defineConfig({
     proxy: {
       // Define proxy rules for API requests
       // Example: Requests to /api/gql are proxied to http://localhost:33001
-      '/api/gql': 'http://localhost:34001',
+      '/api/gql': 'http://localhost:33001',
     },
     watch: {
       // Specify paths to watch for changes
