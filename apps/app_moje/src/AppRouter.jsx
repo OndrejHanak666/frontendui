@@ -10,7 +10,7 @@ export const Routes = [
     //UserRouterSegment
     {
         path:"/hello/:id",
-        element: <PlanPage/>,
+        element: <PlanPage />,
     }
 ]
 

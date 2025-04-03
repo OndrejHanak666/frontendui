@@ -69,7 +69,6 @@ export default defineConfig({
       "@hrbolek/uoisfrontend-granting",
       "@hrbolek/uoisfrontend-admissions",
       "@hrbolek/uoisfrontend-requests",
-      "@hrbolek/uoisfrontend-package_moje",   // zmeneno
     ],
   },
 

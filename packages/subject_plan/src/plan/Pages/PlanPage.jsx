@@ -102,7 +102,7 @@ export const PlanPage = () => {
     const {id} = useParams()
     const plan = {id}
     
-    return <div>Hello World {id}</div>
+    //return <div>Hello World {id}</div>
 
-    //return <PlanPageContentLazy plan={plan} />
+    return <PlanPageContentLazy plan={plan} />
 }

@@ -123,23 +123,23 @@ export const UserButton = ({ operation, children, user, onDone = () => {}, ...pr
     </>);
 };
 
-// Prop validation using PropTypes
-UserCUDButton.propTypes = {
-    /** The operation to perform: "C" for create, "U" for update, "D" for delete. */
-    operation: PropTypes.oneOf(['C', 'U', 'D']).isRequired,
-    /** The label or content for the button. */
-    children: PropTypes.node,
-    /** The parameters for the operation. */
-    user: PropTypes.shape({
-        id: PropTypes.string, // Required for "U" and "D" operations
-        name: PropTypes.string,
-        name_en: PropTypes.string,
-    }).isRequired,
-    /** Callback executed after the operation completes. Receives the `user` object. */
-    onDone: PropTypes.func,
-};
+// // Prop validation using PropTypes
+// UserCUDButton.propTypes = {
+//     /** The operation to perform: "C" for create, "U" for update, "D" for delete. */
+//     operation: PropTypes.oneOf(['C', 'U', 'D']).isRequired,
+//     /** The label or content for the button. */
+//     children: PropTypes.node,
+//     /** The parameters for the operation. */
+//     user: PropTypes.shape({
+//         id: PropTypes.string, // Required for "U" and "D" operations
+//         name: PropTypes.string,
+//         name_en: PropTypes.string,
+//     }).isRequired,
+//     /** Callback executed after the operation completes. Receives the `user` object. */
+//     onDone: PropTypes.func,
+// };
 
-// Default props
-UserCUDButton.defaultProps = {
-    onDone: () => {},
-};
+// // Default props
+// UserCUDButton.defaultProps = {
+//     onDone: () => {},
+// };
