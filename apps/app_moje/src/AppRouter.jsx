@@ -5,12 +5,13 @@ import {
   
 import { UserRouterSegment } from "@hrbolek/uoisfrontend-ug2";
 import { PlanPage } from "../../../packages/subject_plan/src/plan/Pages/PlanPage";
+import { TopicPage } from "../../../packages/subject_plan/src";
 
 export const Routes = [
     //UserRouterSegment
     {
         path:"/hello/:id",
-        element: <PlanPage />,
+        element: <TopicPage />,
     }
 ]
 
