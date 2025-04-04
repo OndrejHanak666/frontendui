@@ -44,10 +44,11 @@ export default defineConfig({
       "@hrbolek/uoisfrontend-shared": path.resolve(__dirname, "../../packages/shared/src"),
       "@hrbolek/uoisfrontend-gql-shared": path.resolve(__dirname, "../../packages/gql_shared/src"),
       "@hrbolek/uoisfrontend-ug": path.resolve(__dirname, "../../packages/ug/src"),
-      "@hrbolek/uoisfrontend-ug2": path.resolve(__dirname, "../../packages/ug2/src"),
       "@hrbolek/uoisfrontend-granting": path.resolve(__dirname, "../../packages/granting/src"),
       "@hrbolek/uoisfrontend-admissions": path.resolve(__dirname, "../../packages/admissions/src"),
       "@hrbolek/uoisfrontend-requests": path.resolve(__dirname, "../../packages/requests/src"),
+      
+      "@hrbolek/uoisfrontend-zp": path.resolve(__dirname, "../../packages/z_pack/src"),
     },
   },
 
@@ -64,7 +65,6 @@ export default defineConfig({
       "@hrbolek/uoisfrontend-shared",
       "@hrbolek/uoisfrontend-gql-shared",
       "@hrbolek/uoisfrontend-ug",
-      "@hrbolek/uoisfrontend-ug2",
       "@hrbolek/uoisfrontend-granting",
       "@hrbolek/uoisfrontend-admissions",
       "@hrbolek/uoisfrontend-requests",
@@ -76,7 +76,7 @@ export default defineConfig({
     proxy: {
       // Define proxy rules for API requests
       // Example: Requests to /api/gql are proxied to http://localhost:33001
-      '/api/gql': 'http://localhost:34001',
+      '/api/gql': 'http://localhost:33001',
     },
     watch: {
       // Specify paths to watch for changes
@@ -88,6 +88,8 @@ export default defineConfig({
         '!../../packages/granting/**',
         '!../../packages/admissions/**',
         '!../../packages/requests/**',
+        
+        '!../../packages/z_pack/**',
       ],
     },
     hmr: {

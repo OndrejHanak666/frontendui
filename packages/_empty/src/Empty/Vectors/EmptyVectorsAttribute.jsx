@@ -33,7 +33,7 @@ export const EmptyVectorsAttribute = ({empty}) => {
     return (
         <>
             {vectors.map(
-                vector => <div vector={item.id}>
+                vector => <div id={vector.id} key={vector.id}>
                     Probably {'<VectorMediumCard vector=\{vector\} />'} <br />
                     {JSON.stringify(vector)}
                 </div>

@@ -1,12 +1,20 @@
+
+import { ProgramPage, ProgramRouterSegment, SubjectRouterSegment } from "@hrbolek/uoisfrontend-zp";
 import {
       createBrowserRouter,
       RouterProvider
 } from "react-router-dom";
   
-import { UserRouterSegment } from "@hrbolek/uoisfrontend-ug2";
+// import { UserRouterSegment } from "@hrbolek/uoisfrontend-ug2";
 
 export const Routes = [
-    UserRouterSegment
+    // UserRouterSegment
+    {
+        path: "/hello/:id",
+        element: <ProgramPage />
+    },
+    ProgramRouterSegment,
+    SubjectRouterSegment
 ]
 
 // const router = createBrowserRouter(Routes, {basename: "/ug"});
