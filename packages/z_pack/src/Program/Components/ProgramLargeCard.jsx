@@ -2,7 +2,6 @@ import Row from "react-bootstrap/Row"
 import { LeftColumn, MiddleColumn } from "@hrbolek/uoisfrontend-shared"
 import { ProgramCardCapsule } from "./ProgramCardCapsule"
 import { ProgramMediumCard } from "./ProgramMediumCard"
-import { ProgramSubjectsAttribute } from "../Vectors/ProgramSubjectsAttribute"
 
 /**
  * A large card component for displaying detailed content and layout for an program entity.
@@ -37,7 +36,6 @@ export const ProgramLargeCard = ({program, children}) => {
                 </LeftColumn>
                 <MiddleColumn>
                     {children}
-                    <ProgramSubjectsAttribute program={program} />
                 </MiddleColumn>
             </Row>
         </ProgramCardCapsule>

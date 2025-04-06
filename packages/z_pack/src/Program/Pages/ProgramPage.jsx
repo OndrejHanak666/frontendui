@@ -6,6 +6,7 @@ import { useAsyncAction } from "@hrbolek/uoisfrontend-gql-shared"
 import { ProgramLargeCard } from "../Components"
 import { ProgramReadAsyncAction } from "../Queries"
 import { ProgramPageNavbar } from "./ProgramPageNavbar"
+import { ProgramSubjectsAttribute } from "../Vectors/ProgramSubjectsAttribute"
 
 /**
  * A page content component for displaying detailed information about an program entity.
@@ -31,7 +32,8 @@ const ProgramPageContent = ({program}) => {
     return (<>
         <ProgramPageNavbar program={program} />
         <ProgramLargeCard program={program}>
-            Program {JSON.stringify(program)}
+            <ProgramSubjectsAttribute program={program} />
+            Program JSON <pre>{JSON.stringify(program, null, 2)}</pre> <br />
         </ProgramLargeCard>
     </>)
 }
