@@ -1,18 +1,19 @@
+
 import {
       createBrowserRouter,
       RouterProvider
 } from "react-router-dom";
   
 import { UserRouterSegment } from "@hrbolek/uoisfrontend-ug2";
-import { PlanPage } from "../../../packages/subject_plan/src/plan/Pages/PlanPage";
-import { TopicPage } from "../../../packages/subject_plan/src";
+import { TopicPage, TopicRouterSegment } from "../../../packages/subject_plan/src";
 
 export const Routes = [
     //UserRouterSegment
     {
-        path:"/hello/:id",
+        path:"/topic/:id",
         element: <TopicPage />,
     }
+    
 ]
 
 // const router = createBrowserRouter(Routes, {basename: "/ug"});
