@@ -1,5 +1,3 @@
-import { Input } from "@hrbolek/uoisfrontend-shared"
-
 /**
  * A component that displays medium-level content for an user entity.
  *
@@ -23,11 +21,16 @@ import { Input } from "@hrbolek/uoisfrontend-shared"
  *   <p>Additional information about the entity.</p>
  * </UserMediumContent>
  */
-export const UserMediumEditableContent = ({user, onChange=(e)=>null, onBlur=(e)=>null, children}) => {
+export const UserMediumContent = ({user, children}) => {
     return (
-        <>           
-            <Input id={"name"} label={"Název"} className="form-control" defaultValue={user?.name|| "Název"} onChange={onChange} onBlur={onBlur} />
-            <Input id={"name_en"} label={"Anglický název"} className="form-control" defaultValue={user?.name_en|| "Anglický název"} onChange={onChange} onBlur={onBlur} />
+        <>
+            <div>
+                <b>jméno</b> {user.name} <br />
+                <b>příjmení</b> {user.surname} <br />
+                <b>email</b> <a href={"mailto:"+user.email}>{user.email}</a> <br />
+            </div>
+            {/* UserMediumContent <br />
+            {JSON.stringify(user)} */}
             {children}
         </>
     )

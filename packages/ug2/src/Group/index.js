@@ -1,11 +1,5 @@
-export * from './GroupCardCapsule'
-export * from './GroupMediumContent'
-export * from './GroupMediumCard'
-export * from './GroupLink'
-export * from './GroupLargeCard'
 
-export * from './GroupCUDButton'
-
+export * from './Components'
 export * from './Scalars'
 export * from './Vectors'
 export * from './Queries'

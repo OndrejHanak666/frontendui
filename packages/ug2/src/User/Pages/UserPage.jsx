@@ -1,8 +1,12 @@
-import { LoadingSpinner } from "@hrbolek/uoisfrontend-shared"
+import { useState } from "react"
 import { useParams } from "react-router"
-import { UserLargeCard } from "../UserLargeCard"
-import { UserReadAsyncAction } from "../Queries/UserReadAsyncAction"
+
+import { CreateDelayer, ErrorHandler, LoadingSpinner } from "@hrbolek/uoisfrontend-shared"
+import { useAsyncAction } from "@hrbolek/uoisfrontend-gql-shared"
+import { UserButton, UserLargeCard } from "../Components"
+import { UserReadAsyncAction } from "../Queries"
 import { UserPageNavbar } from "./UserPageNavbar"
+import { UserGroupsAttribute } from "../Vectors/UserGroupsAttribute"
 
 /**
  * A page content component for displaying detailed information about an user entity.
@@ -28,7 +32,10 @@ const UserPageContent = ({user}) => {
     return (<>
         <UserPageNavbar user={user} />
         <UserLargeCard user={user}>
-            User {JSON.stringify(user)}
+            <UserGroupsAttribute user={user} />
+
+            <UserButton operation="U" user={user} className="btn btn-primary">Upravit</UserButton>
+            <pre>{JSON.stringify(user, null, 2)}</pre> 
         </UserLargeCard>
     </>)
 }
@@ -74,7 +81,7 @@ const UserPageContentLazy = ({user}) => {
 
     return (<>
         {loading && <LoadingSpinner />}
-        {error && <ErrorEvent errors={error} />}
+        {error && <ErrorHandler errors={error} />}
         {entity && <UserPageContent user={entity}  onChange={handleChange} onBlur={handleBlur} />}
     </>)
 }

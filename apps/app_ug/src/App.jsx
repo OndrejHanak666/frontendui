@@ -16,8 +16,8 @@ export const App = () => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar> */}
-            Hello World
-            {/* <AppRouter /> */}
+            {/* Hello World */}
+            <AppRouter />
         </AppCanvas>    
         // {/* </Container> */}
     )

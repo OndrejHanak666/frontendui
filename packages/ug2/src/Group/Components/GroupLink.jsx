@@ -1,6 +1,7 @@
 import { ProxyLink } from "@hrbolek/uoisfrontend-shared"
+import { _uriprefix } from "../../_uriprefix";
 
-export const GroupURI = '/group/group/view/';
+export const GroupURI = `/${_uriprefix}/group/view/`;
 
 /**
  * A React component that renders a `ProxyLink` to an "group" entity's view page.

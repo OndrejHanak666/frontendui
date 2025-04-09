@@ -14,7 +14,8 @@ export const Routes = [
         element: <ProgramPage />
     },
     ProgramRouterSegment,
-    SubjectRouterSegment
+    SubjectRouterSegment,
+    
 ]
 
 // const router = createBrowserRouter(Routes, {basename: "/ug"});

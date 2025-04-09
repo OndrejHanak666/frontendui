@@ -42,7 +42,7 @@ export const EmptyVectorsAttribute = ({empty}) => {
     )
 }
 
-const VectorsAttributeQuery = `
+const EmptyVectorsAttributeQuery = `
 query EmptyQueryRead($id: id, $where: VectorInputFilter, $skip: Int, $limit: Int) {
     result: emptyById(id: $id) {
         __typename
@@ -55,8 +55,8 @@ query EmptyQueryRead($id: id, $where: VectorInputFilter, $skip: Int, $limit: Int
 }
 `
 
-const VectorsAttributeAsyncAction = createAsyncGraphQLAction(
-    VectorsAttributeQuery,
+const EmptyVectorsAttributeAsyncAction = createAsyncGraphQLAction(
+    EmptyVectorsAttributeQuery,
     processVectorAttributeFromGraphQLResult("vectors")
 )
 
@@ -67,7 +67,7 @@ export const EmptyVectorsAttributeInifite = ({empty}) => {
         <InfiniteScroll 
             Visualiser={'VectorMediumCard'} 
             actionParams={{skip: 0, limit: 10}}
-            asyncAction={VectorsAttributeAsyncAction}
+            asyncAction={EmptyVectorsAttributeAsyncAction}
         />
     )
 }

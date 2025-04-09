@@ -1,6 +1,7 @@
 import { ProxyLink } from "@hrbolek/uoisfrontend-shared"
+import { _uriprefix } from "../../_uriprefix";
 
-export const UserURI = '/user/user/view/';
+export const UserURI = `/${_uriprefix}/user/view/`;
 
 /**
  * A React component that renders a `ProxyLink` to an "user" entity's view page.
@@ -30,5 +31,5 @@ export const UserURI = '/user/user/view/';
  * @see ProxyLink - The base component used for rendering the link.
  */
 export const UserLink = ({user}) => {
-    return <ProxyLink to={UserURI + user.id}>{user.name}</ProxyLink>
+    return <ProxyLink to={UserURI + user.id}>{user.name} {user?.surname}</ProxyLink>
 }
