@@ -12,6 +12,8 @@ export const Routes = [
     {
         path:"/topic/:id",
         element: <TopicPage />,
+
+        
     }
     
 ]
