@@ -5,16 +5,70 @@ import {
 } from "react-router-dom";
   
 import { UserRouterSegment } from "@hrbolek/uoisfrontend-ug2";
-import { TopicPage, TopicRouterSegment } from "../../../packages/subject_plan/src";
+import { StudyplanPage} from "../../../packages/subject_plan/src";
+import { mockStudyplan } from "../../../mockStudyPlan";
 
+
+import { StudyplanLessonsAttribute } from "../../../packages/subject_plan/src/StudyPlan/Vectors/StudyPlanLessonsAttribute"
+import { StudyplanInstructorsAttribute } from "../../../packages/subject_plan/src/StudyPlan/Vectors/StudyPlanInstructorsAttribute";
+import { StudyplanFacilitiesAttribute } from "../../../packages/subject_plan/src/StudyPlan/Vectors/StudyPlanFacilitiesAttribute";
+import { StudyplanStudygroupsAttribute } from "../../../packages/subject_plan/src/StudyPlan/Vectors/StudyPlanStudyGroupsAttribute";
+import { StudyplanEventAttribute } from "../../../packages/subject_plan/src/StudyPlan/Scalars/StudyPlanEventAttribute";
+import { StudyplanTopicAttribute } from "../../../packages/subject_plan/src/StudyPlan/Scalars/StudyPlanTopicAttribute";
+import { StudyplanSemesterAttribute } from "../../../packages/subject_plan/src/StudyPlan/Scalars/StudyPlanSemesterAttribute";
+import { StudyplanSubjectAttribute } from "../../../packages/subject_plan/src/StudyPlan/Scalars/StudyPlanSubjectAttribute";
+
+
+
+const prefix = "/app_moje" 
 export const Routes = [
     //UserRouterSegment
     {
-        path:"/topic/:id",
-        element: <TopicPage />,
+        path:"${prefix}/studyplan/:id",
+        element: <StudyplanPage />,
+    },
 
-        
+    {
+        path: "${prefix}/test/lessons",
+        element: <StudyplanLessonsAttribute studyplan={mockStudyplan}/>,
+    },
+    
+    {
+        path: "${prefix}/test/instructors",
+        element: <StudyplanInstructorsAttribute studyplan={mockStudyplan}/>,
+    },
+
+    {
+        path: "${prefix}/test/facilities",
+        element: <StudyplanFacilitiesAttribute studyplan={mockStudyplan}/>,
+    },
+
+    {
+        path: "${prefix}/test/studygroups",
+        element: <StudyplanStudygroupsAttribute studyplan={mockStudyplan}/>,
+    },
+
+    {
+        path: "${prefix}/test/event",
+        element: <StudyplanEventAttribute studyplan={mockStudyplan}/>,
+    },
+
+    {
+        path: "${prefix}/test/topic",
+        element: <StudyplanTopicAttribute studyplan={mockStudyplan}/>,
+    },
+
+    {
+        path: "${prefix}/test/semester",
+        element: <StudyplanSemesterAttribute studyplan={mockStudyplan}/>,
+    },
+
+    {
+        path: "${prefix}/test/subject",
+        element: <StudyplanSubjectAttribute studyplan={mockStudyplan}/>,
     }
+
+
     
 ]
 

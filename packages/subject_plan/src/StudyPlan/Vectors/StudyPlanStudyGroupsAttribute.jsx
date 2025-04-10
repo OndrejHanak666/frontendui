@@ -31,16 +31,25 @@ export const StudyplanStudygroupsAttribute = ({studyplan}) => {
     const { studygroups } = studyplan
     if (typeof studygroups === 'undefined') return null
     return (
-        <>
+        /*<>
             {studygroups.map(
                 studygroup => <div id={studygroup.id} key={studygroup.id}>
                     Probably {'<StudygroupMediumCard studygroup=\{studygroup\} />'} <br />
                     {JSON.stringify(studygroup)}
                 </div>
             )}
-        </>
-    )
-}
+        </>*/
+        <div>
+            <h5>Skupiny studentů:</h5>
+            {unique.map(g => (
+                <div key={g.id} className="mb-2 p-2 border rounded">
+                <div><strong>Název:</strong> {g.name}</div>
+                </div>
+            ))}
+        </div>
+        
+    );
+};
 
 const StudygroupsAttributeQuery = `
 query StudyplanQueryRead($id: id, $where: StudygroupInputFilter, $skip: Int, $limit: Int) {

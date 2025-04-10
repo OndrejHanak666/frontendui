@@ -20,11 +20,22 @@
  */
 export const StudyplanEventAttribute = ({studyplan}) => {
     const {event} = studyplan
-    if (typeof event === 'undefined') return null
+    if (typeof event === 'undefined') return null;
+
+    const formatDate = (iso) => new Date(iso).toLocaleString();
+
     return (
-        <>
+        /*<>
             Probably {'<EventMediumCard event=\{event\} />'} <br />
             {JSON.stringify(event)}
-        </>
-    )
-}
+        </>*/
+        <div className="mb-2">
+            <h5>Termín lekce</h5>
+            <p>
+                Od: {formatDate(event.startdate)} <br />
+                Do: {formatDate(event.enddate)}
+            </p>
+        </div>
+
+    );
+};

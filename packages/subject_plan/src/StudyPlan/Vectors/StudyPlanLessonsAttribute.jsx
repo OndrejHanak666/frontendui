@@ -31,16 +31,26 @@ export const StudyplanLessonsAttribute = ({studyplan}) => {
     const { lessons } = studyplan
     if (typeof lessons === 'undefined') return null
     return (
-        <>
+        /*<>
             {lessons.map(
                 lesson => <div id={lesson.id} key={lesson.id}>
                     Probably {'<LessonMediumCard lesson=\{lesson\} />'} <br />
                     {JSON.stringify(lesson)}
                 </div>
             )}
-        </>
-    )
-}
+        </>*/
+        <div>
+            <h5>Lekce:</h5>
+            {lessons.map((lesson) => (
+                <div key={lesson.id} className="mb-2 p-2 border rounded">
+                <div><strong>Téma:</strong> {lesson.topic?.name}</div>
+                <div><strong>Délka:</strong> {lesson.length} minut</div>
+                <div><strong>Instruktoři:</strong> {lesson.instructors?.map(i => `${i.name} ${i.surname}`).join(", ")}</div>
+            </div>
+        ))}
+        </div>
+    );
+};
 
 const LessonsAttributeQuery = `
 query StudyplanQueryRead($id: id, $where: LessonInputFilter, $skip: Int, $limit: Int) {

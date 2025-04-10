@@ -31,16 +31,24 @@ export const StudyplanInstructorsAttribute = ({studyplan}) => {
     const { instructors } = studyplan
     if (typeof instructors === 'undefined') return null
     return (
-        <>
+        /*<>
             {instructors.map(
                 instructor => <div id={instructor.id} key={instructor.id}>
                     Probably {'<InstructorMediumCard instructor=\{instructor\} />'} <br />
                     {JSON.stringify(instructor)}
                 </div>
             )}
-        </>
-    )
-}
+        </>*/
+        <div>
+            <h5>Vyučující:</h5>
+            {unique.map(i => (
+                <div key={i.id} className="mb-2 p-2 border rounded">
+                    <div><strong>Jméno:</strong> {i.name} {i.surname}</div>
+                </div>
+        ))}
+        </div>
+    );
+};
 
 const InstructorsAttributeQuery = `
 query StudyplanQueryRead($id: id, $where: InstructorInputFilter, $skip: Int, $limit: Int) {

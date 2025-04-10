@@ -22,9 +22,13 @@ export const StudyplanSemesterAttribute = ({studyplan}) => {
     const {semester} = studyplan
     if (typeof semester === 'undefined') return null
     return (
-        <>
+        /*<>
             Probably {'<SemesterMediumCard semester=\{semester\} />'} <br />
             {JSON.stringify(semester)}
-        </>
-    )
-}
+        </>*/
+        <div className="mb-2">
+            <h5>Semestr</h5>
+            <p>Pořadí: {semester.order}</p>
+        </div>
+    );
+};

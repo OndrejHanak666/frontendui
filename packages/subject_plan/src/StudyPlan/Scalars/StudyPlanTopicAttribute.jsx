@@ -22,9 +22,14 @@ export const StudyplanTopicAttribute = ({studyplan}) => {
     const {topic} = studyplan
     if (typeof topic === 'undefined') return null
     return (
-        <>
+        /*<>
             Probably {'<TopicMediumCard topic=\{topic\} />'} <br />
             {JSON.stringify(topic)}
-        </>
-    )
-}
+        </>*/
+        <div className="mb-2">
+            <h5>Téma</h5>
+            <strong>{topic.name}</strong>
+            <p>{topic.description}</p>
+        </div>
+    );
+};
