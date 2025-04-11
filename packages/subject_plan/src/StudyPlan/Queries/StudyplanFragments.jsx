@@ -15,7 +15,7 @@ fragment StudyplanLink on StudyPlanGQLModel {
 export const StudyplanMediumFragment = createQueryStrLazy(
 `
 fragment StudyplanMedium on StudyPlanGQLModel {
-  ...StudyplanLink
+  
   semester {
     id
     order
@@ -28,13 +28,15 @@ fragment StudyplanMedium on StudyPlanGQLModel {
       }
     }
   }
+
+  ...StudyplanLink
 }
 `, StudyplanLinkFragment)
 
 export const StudyplanLargeFragment = createQueryStrLazy(
 `
 fragment StudyplanLarge on StudyPlanGQLModel {
-  ...StudyplanMedium
+  
   lessons {
     id
     order
@@ -62,6 +64,7 @@ fragment StudyplanLarge on StudyPlanGQLModel {
       description
     }
   }
+  ...StudyplanMedium
 }
 `, StudyplanMediumFragment)
   

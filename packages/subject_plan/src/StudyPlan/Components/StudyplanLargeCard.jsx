@@ -35,6 +35,19 @@ export const StudyplanLargeCard = ({studyplan, children}) => {
                     <StudyplanMediumCard studyplan={studyplan}/>
                 </LeftColumn>
                 <MiddleColumn>
+                <h3>Obsah studijního plánu</h3>
+
+                <ul>
+                    {studyplan.lessons && studyplan.lessons.length > 0 ? (
+                    studyplan.lessons.map((lesson, index) => (
+                    <li key={index}>{lesson.topic?.name || `Lekce #${index + 1}`}</li>
+                ))
+                ) : (
+                    <p>Žádné lekce</p>
+                )}
+                </ul>
+
+                    <pre>{JSON.stringify(studyplan, null, 2)}</pre>
                     {children}
                 </MiddleColumn>
             </Row>

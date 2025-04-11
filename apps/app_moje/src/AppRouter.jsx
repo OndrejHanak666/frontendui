@@ -4,9 +4,11 @@ import {
       RouterProvider
 } from "react-router-dom";
   
-import { UserRouterSegment } from "@hrbolek/uoisfrontend-ug2";
+import { StudyplanRouterSegment } from "../../../packages/subject_plan/src/StudyPlan/Pages/StudyplanRouterSegment";
+import { useAsyncActions } from "@hrbolek/uoisfrontend-shared";
 import { StudyplanPage} from "../../../packages/subject_plan/src";
-import { mockStudyplan } from "../../../mockStudyPlan";
+
+/*import { mockStudyplan } from "../../../mockStudyPlan";
 
 
 import { StudyplanLessonsAttribute } from "../../../packages/subject_plan/src/StudyPlan/Vectors/StudyPlanLessonsAttribute"
@@ -17,16 +19,18 @@ import { StudyplanEventAttribute } from "../../../packages/subject_plan/src/Stud
 import { StudyplanTopicAttribute } from "../../../packages/subject_plan/src/StudyPlan/Scalars/StudyPlanTopicAttribute";
 import { StudyplanSemesterAttribute } from "../../../packages/subject_plan/src/StudyPlan/Scalars/StudyPlanSemesterAttribute";
 import { StudyplanSubjectAttribute } from "../../../packages/subject_plan/src/StudyPlan/Scalars/StudyPlanSubjectAttribute";
+import { use } from "react";*/
 
 
 
 const prefix = "/app_moje" 
 export const Routes = [
     //UserRouterSegment
-    {
+    /*{
         path:"${prefix}/studyplan/:id",
         element: <StudyplanPage />,
     },
+
 
     {
         path: "${prefix}/test/lessons",
@@ -66,9 +70,9 @@ export const Routes = [
     {
         path: "${prefix}/test/subject",
         element: <StudyplanSubjectAttribute studyplan={mockStudyplan}/>,
-    }
+    }*/
 
-
+    StudyplanRouterSegment,
     
 ]
 
