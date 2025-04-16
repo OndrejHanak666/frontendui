@@ -89,6 +89,7 @@ export default defineConfig({
         '!../../packages/granting/**',
         '!../../packages/admissions/**',
         '!../../packages/requests/**',
+        "!../../packages/subject_plan/**"
       ],
     },
     hmr: {

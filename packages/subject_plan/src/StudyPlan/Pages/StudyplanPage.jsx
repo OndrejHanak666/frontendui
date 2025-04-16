@@ -6,6 +6,7 @@ import { useAsyncAction } from "@hrbolek/uoisfrontend-gql-shared"
 import { StudyplanLargeCard } from "../Components"
 import { StudyplanReadAsyncAction } from "../Queries"
 import { StudyplanPageNavbar } from "./StudyplanPageNavbar"
+import { StudyplanManagement } from "../Components/StudyPlanManagement"
 
 /**
  * A page content component for displaying detailed information about an studyplan entity.
@@ -32,6 +33,7 @@ const StudyplanPageContent = ({studyplan}) => {
         <StudyplanPageNavbar studyplan={studyplan} />
         <StudyplanLargeCard studyplan={studyplan}>
             Studyplan {JSON.stringify(studyplan)}
+            <StudyplanManagement studyplan={studyplan} />
         </StudyplanLargeCard>
     </>)
 }

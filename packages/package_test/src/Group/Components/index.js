@@ -7,3 +7,4 @@ export * from './GroupMediumContent'
 export * from './GroupMediumCard'
 
 export * from './GroupMediumEditableContent'
+export * from './StateMachineManagement'

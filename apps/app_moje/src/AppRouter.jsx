@@ -4,9 +4,10 @@ import {
       RouterProvider
 } from "react-router-dom";
   
-import { StudyplanRouterSegment } from "../../../packages/subject_plan/src/StudyPlan/Pages/StudyplanRouterSegment";
-import { useAsyncActions } from "@hrbolek/uoisfrontend-shared";
-import { StudyplanPage} from "../../../packages/subject_plan/src";
+import { StudyplanRouterSegment } from "@hanak/uoisfrontend-subject_plan";
+
+import { StudyplanPage} from "@hanak/uoisfrontend-subject_plan";
+import { DataGeneratorPage } from "@hanak/uoisfrontend-subject_plan";
 
 /*import { mockStudyplan } from "../../../mockStudyPlan";
 
@@ -73,6 +74,10 @@ export const Routes = [
     }*/
 
     StudyplanRouterSegment,
+    {
+        path: `${prefix}/studyplan/random`,
+        element: <DataGeneratorPage/>
+    }
     
 ]
 

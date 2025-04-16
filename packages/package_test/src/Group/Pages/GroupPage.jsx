@@ -6,6 +6,7 @@ import { useAsyncAction } from "@hrbolek/uoisfrontend-gql-shared"
 import { GroupLargeCard } from "../Components"
 import { GroupReadAsyncAction } from "../Queries"
 import { GroupPageNavbar } from "./GroupPageNavbar"
+import { StateMachineManagement } from "../Components/StateMachineManagement"
 
 /**
  * A page content component for displaying detailed information about an group entity.
@@ -32,6 +33,7 @@ const GroupPageContent = ({group}) => {
         <GroupPageNavbar group={group} />
         <GroupLargeCard group={group}>
             Group {JSON.stringify(group)}
+            <StateMachineManagement group={group} />
         </GroupLargeCard>
     </>)
 }

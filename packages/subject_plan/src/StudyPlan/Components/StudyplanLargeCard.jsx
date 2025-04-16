@@ -40,7 +40,7 @@ export const StudyplanLargeCard = ({studyplan, children}) => {
                 <ul>
                     {studyplan.lessons && studyplan.lessons.length > 0 ? (
                     studyplan.lessons.map((lesson, index) => (
-                    <li key={index}>{lesson.topic?.name || `Lekce #${index + 1}`}</li>
+                    <li key={index}>{lesson.topic?.name || `Lekce #${index + 1}`}</li>   // nahradit za StudyplanLessonsAtribute
                 ))
                 ) : (
                     <p>Žádné lekce</p>
