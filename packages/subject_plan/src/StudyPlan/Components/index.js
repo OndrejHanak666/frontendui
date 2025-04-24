@@ -7,4 +7,3 @@ export * from './StudyplanMediumContent'
 export * from './StudyplanMediumCard'
 
 export * from './StudyplanMediumEditableContent'
-export * from './StudyPlanManagement'
