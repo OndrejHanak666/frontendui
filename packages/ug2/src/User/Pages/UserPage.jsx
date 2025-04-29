@@ -38,6 +38,7 @@ const UserPageContent = ({user}) => {
             <StateMachnineManagement user={user} />
             <UserData user={user} />
             <UserData user={user} />
+            
             <pre>{JSON.stringify(user, null, 2)}</pre> 
         </UserLargeCard>
     </>)
