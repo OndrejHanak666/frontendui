@@ -35,20 +35,6 @@ export const GroupLargeCard = ({group, children}) => {
                     <GroupMediumCard group={group}/>
                 </LeftColumn>
                 <MiddleColumn>
-                    {/* Členové skupiny */}
-                    <h3>Členové skupiny</h3>
-                    <ul>
-                        {group.members && group.members.length > 0 ? (
-                            group.members.map((member, index) => (
-                                <li key={index}>{member.name}</li>
-                            ))
-                        ) : (
-                            <p>Žádní členové</p>
-                        )}
-                    </ul>
-
-                    {/* Další obsah, pokud něco předáváš jako children */}
-                    <pre>{JSON.stringify(group, null, 2)}</pre>
                     {children}
                 </MiddleColumn>
             </Row>

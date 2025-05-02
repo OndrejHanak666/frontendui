@@ -3,10 +3,11 @@ import { useParams } from "react-router"
 
 import { CreateDelayer, ErrorHandler, LoadingSpinner } from "@hrbolek/uoisfrontend-shared"
 import { useAsyncAction } from "@hrbolek/uoisfrontend-gql-shared"
-import { GroupLargeCard } from "../Components"
+import { GroupLargeCard, UserData } from "../Components"
 import { GroupReadAsyncAction } from "../Queries"
 import { GroupPageNavbar } from "./GroupPageNavbar"
 import { StateMachineManagement } from "../Components/StateMachineManagement"
+//import { UserData } from "../Components/UserData"
 
 /**
  * A page content component for displaying detailed information about an group entity.
@@ -32,8 +33,11 @@ const GroupPageContent = ({group}) => {
     return (<>
         <GroupPageNavbar group={group} />
         <GroupLargeCard group={group}>
-            Group {JSON.stringify(group)}
+            
             <StateMachineManagement group={group} />
+            <UserData group={group} />
+            <UserData group={group} />
+            <pre>{JSON.stringify(group, null, 2)}</pre>
         </GroupLargeCard>
     </>)
 }

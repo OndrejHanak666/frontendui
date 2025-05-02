@@ -4,7 +4,7 @@ import {
       RouterProvider
 } from "react-router-dom";
 
-import { GroupPage } from "../../../packages/package_test/src";
+import { GroupPage, UserRouterSegment } from "../../../packages/package_test/src";
 import { GroupRouterSegment } from "../../../packages/package_test/src";
 
 export const Routes = [
@@ -14,6 +14,7 @@ export const Routes = [
         element: <GroupPage />,
     }*/
    GroupRouterSegment,
+   UserRouterSegment
 ]
 
 // const router = createBrowserRouter(Routes, {basename: "/ug"});

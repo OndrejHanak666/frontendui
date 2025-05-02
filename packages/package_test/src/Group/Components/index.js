@@ -8,3 +8,4 @@ export * from './GroupMediumCard'
 
 export * from './GroupMediumEditableContent'
 export * from './StateMachineManagement'
+export * from './UserData'

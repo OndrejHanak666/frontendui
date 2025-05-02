@@ -71,7 +71,7 @@ services:
 
 
   gql_ug:
-    image: hrbolek/gql_ug:0.10.1
+    image: hrbolek/gql_ug:0.10.2
     environment:
       # link na db mimo stack
       # - POSTGRES_HOST=host.docker.internal:5432
@@ -101,7 +101,7 @@ services:
       - <<: *system-data-volume
 
   gql_office:
-    image: hrbolek/gql_office:0.10.1
+    image: hrbolek/gql_office:0.10.2
     environment:
       # link na db mimo stack
       # - POSTGRES_HOST=host.docker.internal:5432
@@ -130,7 +130,7 @@ services:
       - <<: *system-data-volume
 
   gql_granting:
-    image: hrbolek/gql_granting:0.10.1
+    image: hrbolek/gql_granting:0.10.2
     environment:
       # link na db mimo stack
       # - POSTGRES_HOST=host.docker.internal:5432
@@ -159,7 +159,7 @@ services:
       - <<: *system-data-volume
 
   gql_admissions:
-    image: hrbolek/gql_admissions:0.10.1 #   image: kavic/ug
+    image: hrbolek/gql_admissions:0.10.2 #   image: kavic/ug
     environment:
       # link na db mimo stack
       # - POSTGRES_HOST=host.docker.internal:5432
