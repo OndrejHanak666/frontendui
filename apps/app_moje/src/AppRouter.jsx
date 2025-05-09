@@ -8,7 +8,7 @@ import { StudyplanRouterSegment } from "../../../packages/subject_plan/src/Study
 
 
 import { StudyplanPage } from "../../../packages/subject_plan/src/StudyPlan/Pages/StudyplanPage";
-import { DataGeneratorPage } from "@hanak/uoisfrontend-subject_plan";
+import { DataGeneratorPage } from "../../../packages/subject_plan/src/Data/Pages/DataGeneratorPage";
 
 
 

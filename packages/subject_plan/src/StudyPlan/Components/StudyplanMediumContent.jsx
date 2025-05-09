@@ -26,8 +26,7 @@ export const StudyplanMediumContent = ({studyplan, children}) => {
     return (
         <>
           <h2>Stránka studijního plánu</h2>
-          <p><strong>Název:</strong> {studyplan.name}</p>
-          <p><strong>Anglický název:</strong> {studyplan.nameEn || "Bez anglického názvu"}</p>
+          
     
           <h3>Informace o semestru</h3>
           {studyplan.semester ? (
@@ -49,14 +48,16 @@ export const StudyplanMediumContent = ({studyplan, children}) => {
     
           <h3>Lekce v plánu</h3>
           <ul>
-            {studyplan.lessons && studyplan.lessons.length > 0 ? (
-              studyplan.lessons.map((lesson, index) => (
-                <li key={index}>{lesson.topic?.name || `Lekce #${index + 1}`}</li>
-              ))
-            ) : (
-              <p>Žádné lekce</p>
-            )}
-          </ul>
+        {studyplan.lessons && studyplan.lessons.length > 0 ? (
+          studyplan.lessons.map((lesson, index) => (
+            <li key={index}>
+              {lesson.name || `Lekce #${index + 1}`}
+            </li>
+         ))
+        ) : (
+        <p>Žádné lekce</p>
+        )}
+        </ul>
     
           <h3>Skupiny studentů</h3>
           <ul>

@@ -6,6 +6,7 @@ fragment StudyplanLink on StudyPlanGQLModel {
   __typename
   id
   lastchange
+
   
 }
 `)
@@ -37,9 +38,12 @@ export const StudyplanLargeFragment = createQueryStrLazy(
 fragment StudyplanLarge on StudyPlanGQLModel {
   
   lessons {
+    name
     id
+    lastchange
     order
     length
+    lessontypeId
     event {
       startdate
       enddate
@@ -63,6 +67,7 @@ fragment StudyplanLarge on StudyPlanGQLModel {
       description
     }
   }
+    
   ...StudyplanMedium
 }
 `, StudyplanMediumFragment)
