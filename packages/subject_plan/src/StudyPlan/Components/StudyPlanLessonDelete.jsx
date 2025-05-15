@@ -55,10 +55,14 @@ export const StudyPlanLessonDelete = ({ lesson, onDeleted }) => {
     );
   
     const handleDelete = () => {
+      console.log("Kliknutí na smazat"); // => má se vždy vypsat
+      console.log("lesson", lesson);
       if (!lesson.id || !lesson.lastchange) {
         alert("Chybí ID nebo lastchange lekce.");
         return;
       }
+
+      console.log("deleteLesson", deleteLesson);
   
       deleteLesson({ id: lesson.id, lastchange: lesson.lastchange })
         .then(() => {

@@ -7,6 +7,9 @@ import { StudyPlanLessonDelete } from "./StudyPlanLessonDelete"
 import { StudyGroupInsert } from "./StudyGroupInsert"
 import { useState } from "react"
 import { InstructorInsert } from "./InstructorInsert"
+import { Card, ListGroup } from "react-bootstrap"
+import { Person  } from "react-bootstrap-icons"
+import { InstructorDelete } from "./InstructorDelete"
 
 /**
  * A large card component for displaying detailed content and layout for an studyplan entity.
@@ -92,21 +95,42 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                                     {expandedLessonIndex === index && (
                                         <div style={{ marginTop: "10px", paddingLeft: "10px" }}>
                                             <p><strong>Délka:</strong> {lesson.length ? `${lesson.length} min` : "neznámá"}</p>
-                                            <p><strong>Instruktoři:</strong></p>
-                                            <ul>
-                                                <InstructorInsert lesson={lesson} onChange={onChange} onChoose={(user, fetchLessonUpdate) => {
-                                                    console.log("onSelect", user.id, user.name)
-                                                    const LessonUpdateParams = {
-                                                        planitemId: lesson.id,
-                                                        userId: user.id
-                                                    }
+                                            <Card>
+                                                <Card.Body>
+                                                    <Card.Title>Instruktoři</Card.Title>
 
-                                                    fetchLessonUpdate(LessonUpdateParams);
-                                                    onBlur({ target: { value: studyplan } })
-                                                }} />
-                                                {lesson.instructors?.map(instr => (
-                                                    <li key={instr.id}>{instr.name} {instr.surname}</li>
-                                                )) ?? <li>Žádní instruktoři</li>}
+                                                    <InstructorInsert lesson={lesson} onChange={onChange} onChoose={(user, fetchLessonUpdate) => {
+                                                        console.log("onSelect", user.id, user.name)
+                                                        const LessonUpdateParams = {
+                                                            planitemId: lesson.id,
+                                                            userId: user.id
+                                                        }
+
+                                                        fetchLessonUpdate(LessonUpdateParams);
+                                                        onBlur({ target: { value: studyplan } })
+                                                    }} />
+
+                                                    <ListGroup>
+                                                        {lesson.instructors?.map(instr => (
+                                                            <ListGroup.Item key={instr.id} className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center gap-2">
+                                                                <Person className="me-2" />
+                                                                <span>{instr.name} {instr.surname}</span>
+                                                            </div>
+                                                            <InstructorDelete
+                                                                lesson={lesson}
+                                                                user={instr}
+                                                                onInstructorRemoved={() => onBlur({ target: { value: studyplan } })}
+                                                            />
+                                                            </ListGroup.Item>
+                                                        ))}
+                                                        </ListGroup>
+
+                                                </Card.Body>
+                                            </Card>
+
+                                            <ul>
+
                                             </ul>
                                             <p><strong>Téma:</strong> {lesson.topic?.name ?? "bez tématu"}</p>
                                             <p><strong>Místnosti:</strong></p>

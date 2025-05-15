@@ -74,10 +74,6 @@ export const InstructorInsert = ({onChoose}) => {
     return (
         <div ref={inputRef}
             style={{
-                position: "absolute", // Překrytí ostatních prvků
-                top: "1px",
-                left: "50%",
-                transform: "translateX(-50%)",
                 backgroundColor: "white",
                 zIndex: 1000, // Zajistí, že bude nad ostatními prvky
                 boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
