@@ -50,7 +50,7 @@ const LocalGroup = ({group, onSelect}) => {
 
 
 
-export const StudyGroupInsert = () => {
+export const StudyGroupInsert = ({}) => {
   const {loading, error, fetch} = useAsyncAction(
     QueryGroupAsyncAction,
     {},

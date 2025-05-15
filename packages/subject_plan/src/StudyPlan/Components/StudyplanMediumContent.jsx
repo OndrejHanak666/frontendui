@@ -26,10 +26,12 @@ export const StudyplanMediumContent = ({studyplan, children}) => {
     return (
         <>
           <h2>Stránka studijního plánu</h2>
+          <p><strong>ID:</strong> {studyplan.id} </p>
+          <p><strong>Lastchange:</strong> {studyplan.lastchange} </p>
           
     
           <h3>Informace o semestru</h3>
-          {studyplan.semester ? (
+          {studyplan?.semester ? (
             <ul>
               <li><strong>Semestr:</strong> {studyplan.semester.order}</li>
               <li><strong>Předmět:</strong> {studyplan.semester.subject?.name}</li>
@@ -39,16 +41,11 @@ export const StudyplanMediumContent = ({studyplan, children}) => {
             <p>Semestr není k dispozici.</p>
           )}
     
-          {studyplan.semester?.subject?.program && (
-            <>
-              <h4>Detail programu</h4>
-              <StudyplanMediumCard program={studyplan.semester.subject.program} />
-            </>
-          )}
+          
     
           <h3>Lekce v plánu</h3>
           <ul>
-        {studyplan.lessons && studyplan.lessons.length > 0 ? (
+        {studyplan?.lessons && studyplan.lessons.length > 0 ? (
           studyplan.lessons.map((lesson, index) => (
             <li key={index}>
               {lesson.name || `Lekce #${index + 1}`}
@@ -61,21 +58,21 @@ export const StudyplanMediumContent = ({studyplan, children}) => {
     
           <h3>Skupiny studentů</h3>
           <ul>
-            {studyplan.lessons?.flatMap(l => l.studyGroups || []).map((group, index) => (
+            {studyplan?.lessons?.flatMap(l => l.studyGroups || []).map((group, index) => (
               <li key={index}>{group.name}</li>
             )) || <p>Žádné skupiny</p>}
           </ul>
     
           <h3>Učebny</h3>
           <ul>
-            {studyplan.lessons?.flatMap(l => l.facilities || []).map((room, index) => (
+            {studyplan?.lessons?.flatMap(l => l.facilities || []).map((room, index) => (
               <li key={index}>{room.name}</li>
             )) || <p>Žádné učebny</p>}
           </ul>
     
           <h3>Vyučující</h3>
           <ul>
-            {studyplan.lessons?.flatMap(l => l.instructors || []).map((i, index) => (
+            {studyplan?.lessons?.flatMap(l => l.instructors || []).map((i, index) => (
               <li key={index}>{i.name} {i.surname}</li>
             )) || <p>Žádní vyučující</p>}
           </ul>

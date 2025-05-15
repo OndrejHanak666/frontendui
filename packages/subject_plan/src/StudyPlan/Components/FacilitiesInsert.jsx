@@ -9,6 +9,8 @@ const InsertFacilityAsyncAction = createAsyncGraphQLAction(`query($pattern: Stri
   }
 }`)
 
+
+
 const LocalFacility = ({facility, onSelect}) => {
     const onClick = (e) => {
         e.preventDefault();

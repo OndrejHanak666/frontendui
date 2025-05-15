@@ -66,8 +66,8 @@ export const StudyPlanLessonData = ({studyplan}) => {
       id: crypto.randomUUID(),
       length: 90, 
       name,
-      planId: "6d8c33bf-d47a-4f68-9669-c599086f18bf",
-      topicId: "d47f63b2-f62d-4e11-bb03-24497459c55a",
+      planId: studyplan.id,//"8bde6144-7b82-46d1-ba38-aaab9fa54191",
+      topicId: "5a8ae871-f39c-4467-9e58-21f5ffd719dc",
       lessontypeId: "e2b7cbf6-95e1-11ed-a1eb-0242ac120002",
     };
 

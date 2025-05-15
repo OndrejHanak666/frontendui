@@ -29,6 +29,15 @@ export const StudyplanURI = '/studyplan/studyplan/view/';
  *
  * @see ProxyLink - The base component used for rendering the link.
  */
-export const StudyplanLink = ({studyplan}) => {
+/*export const StudyplanLink = ({studyplan}) => {
     return <ProxyLink to={StudyplanURI + studyplan.id}>{studyplan.name}</ProxyLink>
-}
+}*/
+export const StudyplanLink = ({ studyplan }) => {
+  if (!studyplan || !studyplan.id) return null;
+
+  return (
+    <ProxyLink to={StudyplanURI + studyplan.id}>
+      {studyplan.name || "Bez názvu"}
+    </ProxyLink>
+  );
+};

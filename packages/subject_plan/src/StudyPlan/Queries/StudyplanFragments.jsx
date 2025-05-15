@@ -6,6 +6,7 @@ fragment StudyplanLink on StudyPlanGQLModel {
   __typename
   id
   lastchange
+  
 
   
 }
