@@ -29,7 +29,7 @@ const LocalInstructor = ({ user, onSelect }) => {
     }
     return (
         <div>
-            <a onClick={onClick} href="#">{user.fullname} [{user.id}]</a>
+            <a onClick={onClick} href="#">{user.fullname}</a>
         </div>
     )
 }

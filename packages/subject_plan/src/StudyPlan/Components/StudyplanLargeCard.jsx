@@ -10,6 +10,7 @@ import { InstructorInsert } from "./InstructorInsert"
 import { Card, ListGroup } from "react-bootstrap"
 import { Person  } from "react-bootstrap-icons"
 import { InstructorDelete } from "./InstructorDelete"
+import { FacilitiesInsert } from "./FacilitiesInsert"
 
 /**
  * A large card component for displaying detailed content and layout for an studyplan entity.
@@ -35,34 +36,7 @@ import { InstructorDelete } from "./InstructorDelete"
  *   <p>Additional content for the middle column.</p>
  * </StudyplanLargeCard>
  */
-/*export const StudyplanLargeCard = ({studyplan, children}) => {
-    return (
-        <StudyplanCardCapsule studyplan={studyplan} >
-            <Row>
-                <LeftColumn>
-                    <StudyplanMediumCard studyplan={studyplan}/>
-                </LeftColumn>
-                <MiddleColumn>
-                <h3>Obsah studijního plánu</h3>
 
-                <ul>
-                    <StudyPlanLessonData />
-                    {studyplan.lessons && studyplan.lessons.length > 0 ? (
-                    studyplan.lessons.map((lesson, index) => (
-                    <li key={index}>{lesson.name || `Lekce #${index + 1}`}</li>   // nahradit za StudyplanLessonsAtribute
-                ))
-                ) : (
-                    <p>Žádné lekce</p>
-                )}
-                </ul>
-
-                    <pre>{JSON.stringify(studyplan, null, 2)}</pre>
-                    {children}
-                </MiddleColumn>
-            </Row>
-        </StudyplanCardCapsule>
-    )
-}*/
 
 export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) => {
     const [expandedLessonIndex, setExpandedLessonIndex] = useState(null);
@@ -126,6 +100,37 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                                                         ))}
                                                         </ListGroup>
 
+                                                </Card.Body>
+                                            </Card>
+
+                                            <Card>
+                                                <Card.Body>
+                                                    <Card.Title>Místnosti</Card.Title>
+
+                                                    <FacilitiesInsert  lesson={lesson} onChange={onChange} onChoose={(facility, fetchFacilityUpdate) => {
+                                                        const FacilityUpdateParams = {
+                                                            planitemId: lesson.id,
+                                                            facilityId: facility.id
+                                                        };
+                                                        fetchFacilityUpdate(FacilityUpdateParams);
+                                                        onBlur({ target: { value: studyplan } });
+                                                        }} />
+
+                                                    <ListGroup>
+                                                      {lesson.facilities?.length > 0 ? (
+                                                        lesson.facilities.map(facility => (
+                                                          <ListGroup.Item key={facility.id} className="d-flex align-items-center justify-content-between">
+                                                            <div className="d-flex align-items-center gap-2">
+                                                              {/* případně můžeš přidat ikonu */}
+                                                              <span>{facility.name}</span>
+                                                            </div>
+                                                            {/* Pokud chceš i mazací tlačítko, můžeš zde přidat komponentu pro mazání */}
+                                                          </ListGroup.Item>
+                                                        ))
+                                                      ) : (
+                                                        <ListGroup.Item>Žádné místnosti</ListGroup.Item>
+                                                      )}
+                                                    </ListGroup>
                                                 </Card.Body>
                                             </Card>
 

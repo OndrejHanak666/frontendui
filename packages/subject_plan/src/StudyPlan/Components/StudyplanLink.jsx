@@ -37,7 +37,7 @@ export const StudyplanLink = ({ studyplan }) => {
 
   return (
     <ProxyLink to={StudyplanURI + studyplan.id}>
-      {studyplan.name || "Bez názvu"}
+      {studyplan.name || "Studijní plán"}
     </ProxyLink>
   );
 };
