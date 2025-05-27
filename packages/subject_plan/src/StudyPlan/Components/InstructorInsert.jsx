@@ -4,7 +4,14 @@ import { CreateDelayer } from "@hrbolek/uoisfrontend-shared";
 
 
 const QueryInstructorAsyncAction = createAsyncGraphQLAction(`query QueryInstructor($pattern: String!) {
-  userPage(where: {name: {_ilike: $pattern}}) {
+  userPage(
+    where: {
+      _or: [
+        { name: { _ilike: $pattern } },
+        { surname: { _ilike: $pattern } }
+      ]
+    }
+  ) {
     __typename
     id
     name

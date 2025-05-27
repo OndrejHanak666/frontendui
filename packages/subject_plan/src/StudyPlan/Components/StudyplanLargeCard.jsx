@@ -11,6 +11,12 @@ import { Card, ListGroup } from "react-bootstrap"
 import { Person  } from "react-bootstrap-icons"
 import { InstructorDelete } from "./InstructorDelete"
 import { FacilitiesInsert } from "./FacilitiesInsert"
+import { FacilityDelete } from "./FacilityDelete"
+import { StudyGroupDelete } from "./StudyGroupDelete"
+import { ExamInsert } from "./ExamInsert"
+import { SemestrTestInsert } from "./SemestrTestInsert"
+import { ExamButton } from "../../Exam"
+
 
 /**
  * A large card component for displaying detailed content and layout for an studyplan entity.
@@ -53,7 +59,7 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                 </LeftColumn>
                 <MiddleColumn>
                     <h3>Obsah studijního plánu</h3>
-                    <StudyPlanLessonData studyplan={studyplan} />
+                    <StudyPlanLessonData studyplan={studyplan}  />
 
                     {studyplan.lessons && studyplan.lessons.length > 0 ? (
                         <ul className="list-group">
@@ -124,7 +130,11 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                                                               {/* případně můžeš přidat ikonu */}
                                                               <span>{facility.name}</span>
                                                             </div>
-                                                            {/* Pokud chceš i mazací tlačítko, můžeš zde přidat komponentu pro mazání */}
+                                                            <FacilityDelete
+                                                                lesson={lesson}
+                                                                facility={facility}
+                                                                onFacilityRemoved={() => onBlur({ target: { value: studyplan } })}
+                                                            />                      
                                                           </ListGroup.Item>
                                                         ))
                                                       ) : (
@@ -134,23 +144,46 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                                                 </Card.Body>
                                             </Card>
 
+                                            <Card>
+                                              <Card.Body>
+                                                <Card.Title>Studijní skupiny</Card.Title>
+
+                                                <StudyGroupInsert
+                                                  lesson={lesson}
+                                                  onChange={onChange}
+                                                  onChoose={(group, fetchGroupUpdate) => {
+                                                    const GroupUpdateParams = {
+                                                      planitemId: lesson.id,
+                                                      groupId: group.id
+                                                    };
+                                                    fetchGroupUpdate(GroupUpdateParams);
+                                                    onBlur({ target: { value: studyplan } });
+                                                  }}
+                                                />
+
+                                                <ListGroup>
+                                                  {lesson.studyGroups?.length > 0 ? (
+                                                    lesson.studyGroups.map(group => (
+                                                      <ListGroup.Item key={group.id} className="d-flex align-items-center justify-content-between">
+                                                        <span>{group.name}</span>
+                                                        <StudyGroupDelete 
+                                                          lesson={lesson}
+                                                          group={group}
+                                                          onGroupRemoved={() => onBlur({ target: { value: studyplan } })}
+                                                        />
+                                                      </ListGroup.Item>
+                                                    ))
+                                                  ) : (
+                                                    <ListGroup.Item>Žádné studijní skupiny</ListGroup.Item>
+                                                  )}
+                                                </ListGroup>
+                                              </Card.Body>
+                                            </Card>
+
                                             <ul>
 
                                             </ul>
                                             <p><strong>Téma:</strong> {lesson.topic?.name ?? "bez tématu"}</p>
-                                            <p><strong>Místnosti:</strong></p>
-                                            <ul>
-                                                {lesson.facilities?.map(f => (
-                                                    <li key={f.id}>{f.name}</li>
-                                                )) ?? <li>Žádné místnosti</li>}
-                                            </ul>
-                                            <p><strong>Studijní skupiny:</strong></p>
-                                            <ul>
-
-                                                {lesson.studyGroups?.map(f => (
-                                                    <li key={f.id}>{f.name}</li>
-                                                )) ?? <li>Žádné učební skupiny</li>}
-                                            </ul>
                                             <p><strong>Lastchange:</strong> {lesson.lastchange ?? ""}</p>
                                         </div>
                                     )}
@@ -162,6 +195,38 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                     )}
 
                     {children}
+                    <ExamInsert studyplan = {studyplan} />
+                    <SemestrTestInsert studyplan = {studyplan} />
+
+                    <Card className="mt-4">
+                      <Card.Body>
+                        <div className="d-flex align-items-center justify-content-between mb-2">
+                          <Card.Title className="mb-0">Klasifikace</Card.Title>
+                          <ExamButton operation="U" exam={studyplan.exam} onDone={(exam) => console.log("ExamPageContent.onDone", studyplan.exam)}>
+                            Upravit
+                          </ExamButton>
+                        </div>
+                        {studyplan.exam ? (
+                          <ListGroup variant="flush">
+                            <ListGroup.Item>
+                              <strong>Název:</strong> {studyplan.exam.name ?? "—"}
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                              <strong>Minimální počet bodů:</strong> {studyplan.exam.minScore ?? "—"}
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                              <strong>Maximální počet bodů:</strong> {studyplan.exam.maxScore ?? "—"}
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                              <strong>Popis:</strong> {studyplan.exam.description ?? "—"}
+                            </ListGroup.Item>
+                          </ListGroup>
+                        ) : (
+                          <div>Žádné zkoušky</div>
+                        )}
+                      </Card.Body>
+                    </Card>
+                    
                 </MiddleColumn>
             </Row>
         </StudyplanCardCapsule>

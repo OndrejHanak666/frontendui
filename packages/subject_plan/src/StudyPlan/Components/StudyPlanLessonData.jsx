@@ -67,7 +67,7 @@ export const StudyPlanLessonData = ({studyplan}) => {
       length: 90, 
       name,
       planId: studyplan.id,//"8bde6144-7b82-46d1-ba38-aaab9fa54191",
-      topicId: "5a8ae871-f39c-4467-9e58-21f5ffd719dc",
+      topicId: "ef1c48b7-4f65-4696-b89f-a95c2cf8814f",
       lessontypeId: "e2b7cbf6-95e1-11ed-a1eb-0242ac120002",
     };
 
@@ -76,6 +76,7 @@ export const StudyPlanLessonData = ({studyplan}) => {
         console.log("Lekce vytvořena:", json);
         alert("Lekce vytvořena!");
         setName("");
+        
         
         // TODO: doplnit třeba refetch dat nebo dispatch update
       })

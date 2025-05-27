@@ -13,24 +13,14 @@ const QueryGroupAsyncAction = createAsyncGraphQLAction(`query ($pattern: String!
 
 
 
-const LessonUpdateAsyncAction = createAsyncGraphQLAction(`
-mutation MyMutation(
-  $id: UUID!,
-  $lastchange: DateTime!,
-  $lessontypeId: UUID!,
-  $topicId: UUID!,
-  $eventId: UUID,
-  ) {
-  studyPlanLessonUpdate(
-    studyPlanLesson: {id: $id, lastchange: $lastchange, lessontypeId: $lessontypeId, topicId: $topicId, eventId: $eventId}
-  ) {
-    ...on StudyPlanLessonGQLModel {
-      __typename
-      id
-      lastchange
+const GroupUpdateAsyncAction = createAsyncGraphQLAction(`
+mutation MyMutation($planitemId: UUID!, $groupId: UUID!) {
+  studyPlanLessonAddGroup(
+    studyPlanLesson: {planitemId: $planitemId, groupId: $groupId})
+    {
+    __typename
     }
-  }
-}
+    }
 `)
 
 const LocalGroup = ({group, onSelect}) => {
@@ -50,14 +40,14 @@ const LocalGroup = ({group, onSelect}) => {
 
 
 
-export const StudyGroupInsert = ({}) => {
+export const StudyGroupInsert = ({onChoose}) => {
   const {loading, error, fetch} = useAsyncAction(
     QueryGroupAsyncAction,
     {},
     { deferred: true }
   );
-  const {fetch: fetchLessonUpdate, loading:lessonloading, error: lessonerror} = useAsyncAction(
-      LessonUpdateAsyncAction,
+  const {fetch: fetchGroupUpdate, loading:grouploading, error: grouperror} = useAsyncAction(
+      GroupUpdateAsyncAction,
     {},
     { deferred: true }
   );//tady bude mutace)
@@ -69,16 +59,8 @@ export const StudyGroupInsert = ({}) => {
   const onSelect = async (group) => {
     
     console.log("onSelect", group.id, group.name)
-    const LessonUpdateParams = {
-      id: group.id,
-      lastchange: group.lastchange,
-      lessontypeId: "e2b7cbf6-95e1-11ed-a1eb-0242ac120002",
-      topicId: "d47f63b2-f62d-4e11-bb03-24497459c55a",
-      eventId: crypto.randomUUID(),
-      
-    }
-
-    fetchLessonUpdate(LessonUpdateParams);
+    onChoose(group, fetchGroupUpdate);
+        setGroups([]);
   }
 
    const onChange = (e) => {
@@ -101,10 +83,6 @@ export const StudyGroupInsert = ({}) => {
   return (
         <div ref={inputRef}
         style={{
-          position: "absolute", // Překrytí ostatních prvků
-          top: "1px",
-          left: "50%",
-          transform: "translateX(-50%)",
           backgroundColor: "white",
           zIndex: 1000, // Zajistí, že bude nad ostatními prvky
           boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
@@ -112,14 +90,14 @@ export const StudyGroupInsert = ({}) => {
           width: "400px",
         }}
       >
-        {lessonloading && <div>Načítám...</div>}
-        {lessonerror && <div style={{ color: "red" }}>Chyba: {lessonerror.message}</div>}
+        {grouploading && <div>Načítám...</div>}
+        {grouperror && <div style={{ color: "red" }}>Chyba: {grouperror.message}</div>}
           <input
             type="text"
             defaultValue=""
             onChange={onChange}
             className="form-control"
-            placeholder="Zadejte název programu"
+            placeholder="Zadejte název skupiny"
           />
           {groups &&
             groups.map((group) => {

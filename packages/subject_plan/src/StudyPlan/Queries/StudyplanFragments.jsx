@@ -68,6 +68,15 @@ fragment StudyplanLarge on StudyPlanGQLModel {
       description
     }
   }
+
+  exam {
+    id
+    name
+    minScore
+    maxScore
+    description
+    lastchange
+    }
     
   ...StudyplanMedium
 }

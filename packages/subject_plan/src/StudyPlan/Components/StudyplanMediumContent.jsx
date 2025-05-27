@@ -111,7 +111,11 @@ export const StudyplanMediumContent = ({ studyplan, children }) => {
         ) : (
           <p>Žádní vyučující</p>
         )}
-      </ul>
+      </ul> 
+
+      <h3>Zkoušky</h3>
+      <p><strong>ID:</strong> {studyplan.exam.id}</p>
+      <p><strong>Lastchange:</strong> {studyplan.exam.lastchange}</p>
 
       <br />
       {children}
