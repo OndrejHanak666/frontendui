@@ -114,8 +114,14 @@ export const StudyplanMediumContent = ({ studyplan, children }) => {
       </ul> 
 
       <h3>Zkoušky</h3>
-      <p><strong>ID:</strong> {studyplan.exam.id}</p>
-      <p><strong>Lastchange:</strong> {studyplan.exam.lastchange}</p>
+      {studyplan.exam ? (
+        <>
+          <p><strong>ID:</strong> {studyplan.exam.id}</p>
+          <p><strong>Lastchange:</strong> {studyplan.exam.lastchange}</p>
+        </>
+      ) : (
+        <p>Žádná zkouška</p>
+      )}
 
       <br />
       {children}
@@ -123,4 +129,4 @@ export const StudyplanMediumContent = ({ studyplan, children }) => {
   );
 };
 
-    
+

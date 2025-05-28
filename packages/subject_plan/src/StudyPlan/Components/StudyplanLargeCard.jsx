@@ -14,8 +14,10 @@ import { FacilitiesInsert } from "./FacilitiesInsert"
 import { FacilityDelete } from "./FacilityDelete"
 import { StudyGroupDelete } from "./StudyGroupDelete"
 import { ExamInsert } from "./ExamInsert"
-import { SemestrTestInsert } from "./SemestrTestInsert"
 import { ExamButton } from "../../Exam"
+import { StudentEvaluationInsert } from "./StudentInsert"
+import { EvaluationButton } from "../../Evaluation/Components/EvaluationCUDButton"
+import { EvaluationDeleteButton } from "./EvaluationDelete"
 
 
 /**
@@ -46,10 +48,13 @@ import { ExamButton } from "../../Exam"
 
 export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) => {
     const [expandedLessonIndex, setExpandedLessonIndex] = useState(null);
+    const [expandedEvaluationIndex, setExpandedEvaluationIndex] = useState(null);
 
     const toggleLesson = (index) => {
         setExpandedLessonIndex(prevIndex => prevIndex === index ? null : index);
     };
+
+    console.log("StudyplanLargeCard", studyplan);
 
     return (
         <StudyplanCardCapsule studyplan={studyplan}>
@@ -195,16 +200,20 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                     )}
 
                     {children}
-                    <ExamInsert studyplan = {studyplan} />
-                    <SemestrTestInsert studyplan = {studyplan} />
+
+                    <div className="mt-4">
+                      <ExamInsert studyplan={studyplan} />
+                    </div>
 
                     <Card className="mt-4">
                       <Card.Body>
                         <div className="d-flex align-items-center justify-content-between mb-2">
                           <Card.Title className="mb-0">Klasifikace</Card.Title>
-                          <ExamButton operation="U" exam={studyplan.exam} onDone={(exam) => console.log("ExamPageContent.onDone", studyplan.exam)}>
-                            Upravit
-                          </ExamButton>
+                          {studyplan.exam?.id && (
+                            <ExamButton operation="U" exam={studyplan.exam} onDone={() => onBlur({ target: { value: studyplan } })}>
+                              Upravit
+                            </ExamButton>
+                          )}
                         </div>
                         {studyplan.exam ? (
                           <ListGroup variant="flush">
@@ -226,6 +235,62 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                         )}
                       </Card.Body>
                     </Card>
+
+                    <div className="mt-4">
+                      {studyplan.exam?.id && studyplan.semester?.subject?.program?.id && (
+                        <StudentEvaluationInsert
+                          examId={studyplan.exam.id}
+                          programId={studyplan.semester.subject.program.id}
+                          onDone={() => onBlur({ target: { value: studyplan } })}
+                        />
+                      )}
+                    </div>
+
+                    <Card className="mt-4">
+                      <Card.Body>
+                        <div className="d-flex align-items-center justify-content-between mb-2">
+                          <Card.Title className="mb-0">Hodnocení</Card.Title>
+                        </div>
+                        {Array.isArray(studyplan.exam?.evaluations) && studyplan.exam?.evaluations.length > 0 ? (
+                          <div className="d-flex flex-column gap-3">
+                            {studyplan.exam.evaluations.map((evalItem, idx) => (
+                              <Card key={evalItem.id || idx} className="mb-2">
+                                <Card.Body>
+                                  <ListGroup variant="flush">
+                                    <ListGroup.Item>
+                                      <strong>ID:</strong> {evalItem.id ?? "—"}
+                                    </ListGroup.Item>
+                                    <ListGroup.Item>
+                                      <strong>Student ID:</strong> {evalItem.studentId ?? "—"}
+                                    </ListGroup.Item>                                   
+                                    <ListGroup.Item>
+                                      <strong>Body:</strong> {evalItem.points ?? "—"}
+                                    </ListGroup.Item>
+                                    <ListGroup.Item>
+                                      <strong>Prošel:</strong> {evalItem.passed !== undefined ? (evalItem.passed ? "Ano" : "Ne") : "—"}
+                                    </ListGroup.Item>
+                                    <ListGroup.Item>
+                                      <strong>Lastchange:</strong> {evalItem.lastchange ?? "—"}
+                                    </ListGroup.Item>
+                                  </ListGroup>
+                                  <div className="mt-2 d-flex gap-2">
+                                    <EvaluationButton
+                                        operation="U"
+                                        evaluation={evalItem}
+                                        onDone={() => onBlur({ target: { value: studyplan } })}
+                                      >Upravit</EvaluationButton>
+                                    <EvaluationDeleteButton evaluation={evalItem} onDone={() => onBlur({ target: { value: studyplan } })}/>
+                                  </div>
+                                </Card.Body>
+                              </Card>
+                            ))}
+                          </div>
+                        ) : (
+                          <div>Žádné Hodnocení</div>
+                        )}
+                      </Card.Body>
+                    </Card>
+                    
                     
                 </MiddleColumn>
             </Row>

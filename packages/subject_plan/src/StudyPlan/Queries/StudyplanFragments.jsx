@@ -76,7 +76,14 @@ fragment StudyplanLarge on StudyPlanGQLModel {
     maxScore
     description
     lastchange
+    evaluations {
+      id
+      points
+      passed
+      studentId
+      lastchange
     }
+  }
     
   ...StudyplanMedium
 }

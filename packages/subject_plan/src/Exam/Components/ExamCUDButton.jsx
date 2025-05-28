@@ -28,8 +28,6 @@ import { ExamMediumEditableContent } from "./ExamMediumEditableContent";
  * @param {string} [props.exam.id] - The unique identifier for the item (required for "U" and "D").
  * @param {string} [props.exam.name] - The name of the item (optional).
  * @param {string} [props.exam.name_en] - The English name of the item (optional).
- * @param {Int16Array} [props.exam.minScore] - The minimum score for the exam (optional).
- * @param {Int16Array} [props.exam.maxScore] - The maximum score for the exam (optional).
  * @param {string} [props.exam.description] - A description of the exam (optional).
  * @param {Function} [props.onDone=(exam) => {}] - Callback executed after the operation completes. Receives the `exam` object.
  * @param {...Object} props - Additional props passed to the underlying button components.
@@ -102,16 +100,22 @@ export const ExamButton = ({ operation, children, exam, onDone = () => {}, ...pr
 
     const { asyncAction, dialogTitle, loadingMsg, renderContent } = operationConfig[operation];
 
-    const { error, loading, fetch, entity } = useAsyncAction(asyncAction, exam, { deferred: true });
+    const { error, loading, fetch, entity } = useAsyncAction(asyncAction, exam || {}, { deferred: true });
     const handleClick = async (params = {}) => {
+        const parseNumber = (val) => {
+        const num = parseInt(val, 10);
+        return !isNaN(num) ? num : undefined;
+    };
         const fetchParams = {
             ...exam,
             ...params,
+            minScore: parseNumber(params.minScore),
+            maxScore: parseNumber(params.maxScore)
             
         };
         const freshExam = await fetch(fetchParams);
         onDone(freshExam);
-        console.log("ExamInsert", params)
+        console.log("ExamInsert", fetchParams)
     };
 
     // Validate required fields for "U" and "D"

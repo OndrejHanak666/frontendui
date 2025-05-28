@@ -29,6 +29,6 @@ mutation MyMutation($id: UUID!, $lastchange: DateTime!, $minScore: Int!, $maxSco
     }
   }
 }
-`, ExamLargeFragment)
+`)
 
 export const ExamUpdateAsyncAction = createAsyncGraphQLAction(ExamUpdateMutation)

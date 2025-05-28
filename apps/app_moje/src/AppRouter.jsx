@@ -22,7 +22,7 @@ export const Routes = [
     },
 
     {
-        path: `${prefix}/studyplan/:id`,
+        path: `${prefix}/studyplan/edit/:id`,
         element: <StudyplanPage/>
     }
     
