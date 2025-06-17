@@ -18,6 +18,7 @@ import { ExamButton } from "../../Exam"
 import { StudentEvaluationInsert } from "./StudentInsert"
 import { EvaluationButton } from "../../Evaluation/Components/EvaluationCUDButton"
 import { EvaluationDeleteButton } from "./EvaluationDelete"
+import { ExamPartsInsert } from "./ExamPartsInsert"
 
 
 /**
@@ -64,21 +65,23 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                 </LeftColumn>
                 <MiddleColumn>
                     <h3>Obsah studijního plánu</h3>
-                    <StudyPlanLessonData studyplan={studyplan}  />
+                    <StudyPlanLessonData studyplan={studyplan} onDone={() => onBlur({ target: { value: studyplan } })} />
 
                     {studyplan.lessons && studyplan.lessons.length > 0 ? (
-                        <ul className="list-group">
+                        <div className="list-group">
                             {studyplan.lessons.map((lesson, index) => (
-                                <li key={lesson.id} className="list-group-item">
+                                <div key={lesson.id} className="list-group-item">
                                     <div
                                         style={{ cursor: "pointer", fontWeight: "bold" }}
                                         onClick={() => toggleLesson(index)}
                                     >
-                                        {lesson.name || `Lekce #${index + 1}`}
+                                        
                                         <StudyPlanLessonDelete lesson={lesson} onDeleted={() => onBlur({ target: { value: studyplan } })} />
                                     </div>
                                     {expandedLessonIndex === index && (
                                         <div style={{ marginTop: "10px", paddingLeft: "10px" }}>
+                                            {/* Název lekce zobrazíš zde */}
+                                            <p><strong>Název:</strong> {lesson.name ?? `Lekce #${index + 1}`}</p>
                                             <p><strong>Délka:</strong> {lesson.length ? `${lesson.length} min` : "neznámá"}</p>
                                             <Card>
                                                 <Card.Body>
@@ -118,14 +121,10 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                                                 <Card.Body>
                                                     <Card.Title>Místnosti</Card.Title>
 
-                                                    <FacilitiesInsert  lesson={lesson} onChange={onChange} onChoose={(facility, fetchFacilityUpdate) => {
-                                                        const FacilityUpdateParams = {
-                                                            planitemId: lesson.id,
-                                                            facilityId: facility.id
-                                                        };
-                                                        fetchFacilityUpdate(FacilityUpdateParams);
-                                                        onBlur({ target: { value: studyplan } });
-                                                        }} />
+                                                    <FacilitiesInsert
+                                                      lesson={lesson}
+                                                      onChoose={() => onBlur({ target: { value: studyplan } })}
+                                                    />
 
                                                     <ListGroup>
                                                       {lesson.facilities?.length > 0 ? (
@@ -185,16 +184,14 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                                               </Card.Body>
                                             </Card>
 
-                                            <ul>
-
-                                            </ul>
+                                            
                                             <p><strong>Téma:</strong> {lesson.topic?.name ?? "bez tématu"}</p>
                                             <p><strong>Lastchange:</strong> {lesson.lastchange ?? ""}</p>
                                         </div>
                                     )}
-                                </li>
+                                </div>
                             ))}
-                        </ul>
+                        </div>
                     ) : (
                         <p>Žádné lekce</p>
                     )}
@@ -202,7 +199,7 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                     {children}
 
                     <div className="mt-4">
-                      <ExamInsert studyplan={studyplan} />
+                      <ExamInsert studyplan={studyplan} onDone={() => onBlur({ target: { value: studyplan } })} />
                     </div>
 
                     <Card className="mt-4">
@@ -210,26 +207,64 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                         <div className="d-flex align-items-center justify-content-between mb-2">
                           <Card.Title className="mb-0">Klasifikace</Card.Title>
                           {studyplan.exam?.id && (
-                            <ExamButton operation="U" exam={studyplan.exam} onDone={() => onBlur({ target: { value: studyplan } })}>
+                            <ExamButton className = "btn btn-outline-success" operation="U" exam={studyplan.exam} onDone={() => onBlur({ target: { value: studyplan } })}>
                               Upravit
                             </ExamButton>
                           )}
                         </div>
                         {studyplan.exam ? (
-                          <ListGroup variant="flush">
-                            <ListGroup.Item>
-                              <strong>Název:</strong> {studyplan.exam.name ?? "—"}
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                              <strong>Minimální počet bodů:</strong> {studyplan.exam.minScore ?? "—"}
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                              <strong>Maximální počet bodů:</strong> {studyplan.exam.maxScore ?? "—"}
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                              <strong>Popis:</strong> {studyplan.exam.description ?? "—"}
-                            </ListGroup.Item>
-                          </ListGroup>
+                          <>
+                            <ListGroup variant="flush">
+                              <ListGroup.Item>
+                                <strong>Název:</strong> {studyplan.exam.name ?? "—"}
+                              </ListGroup.Item>
+                              <ListGroup.Item>
+                                <strong>Minimální počet bodů:</strong> {studyplan.exam.minScore ?? "—"}
+                              </ListGroup.Item>
+                              <ListGroup.Item>
+                                <strong>Maximální počet bodů:</strong> {studyplan.exam.maxScore ?? "—"}
+                              </ListGroup.Item>
+                              <ListGroup.Item>
+                                <strong>Popis:</strong> {studyplan.exam.description ?? "—"}
+                              </ListGroup.Item>
+                            </ListGroup>
+                            {/* Výpis parts */}
+                            <div className="mt-3">
+                              <h5>Části zkoušky</h5>
+                              {studyplan.exam?.id && (
+                                <ExamPartsInsert
+                                  examId={studyplan.exam.id}
+                                  onDone={() => onBlur({ target: { value: studyplan } })}
+                                />
+                              )}
+                              {Array.isArray(studyplan.exam.parts) && studyplan.exam.parts.length > 0 ? (
+                                <ListGroup>
+                                  {studyplan.exam.parts.map(part => (
+                                    <ListGroup.Item key={part.id}>
+                                      <div><strong>Název:</strong> {part.name ?? "—"}</div>
+                                      <div><strong>Popis:</strong> {part.description ?? "—"}</div>
+                                      <div><strong>Min. body:</strong> {part.minScore ?? "—"}</div>
+                                      <div><strong>Max. body:</strong> {part.maxScore ?? "—"}</div>
+                                      <div><strong>Lastchange:</strong> {part.lastchange ?? "—"}</div>
+                                      <div className="mt-2">
+                                        <ExamButton
+                                          className="btn btn-outline-success btn-sm"
+                                          operation="U"
+                                          exam={part}
+                                          onDone={() => onBlur({ target: { value: studyplan } })}
+                                        >
+                                          Upravit část
+                                        </ExamButton>
+                                      </div>
+                                    </ListGroup.Item>
+                                  ))}
+                                </ListGroup>
+                              ) : (
+                                <div></div>
+                              )}
+                            </div>
+                            {/* Konec parts */}
+                          </>
                         ) : (
                           <div>Žádné zkoušky</div>
                         )}
@@ -275,6 +310,7 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                                   </ListGroup>
                                   <div className="mt-2 d-flex gap-2">
                                     <EvaluationButton
+                                        className="btn btn-outline-success"
                                         operation="U"
                                         evaluation={evalItem}
                                         onDone={() => onBlur({ target: { value: studyplan } })}

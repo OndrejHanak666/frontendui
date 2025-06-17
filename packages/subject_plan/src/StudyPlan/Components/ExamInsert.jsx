@@ -44,7 +44,7 @@ const InsertExamAsyncAction = createAsyncGraphQLAction(`mutation MyMutation($id:
 }`);
 
 
-export const ExamInsert = ({studyplan, onDone}) => {
+export const ExamInsert = ({studyplan, onDone = () => {}}) => {
     const { fetch: fetchInsert, loading, error } = useAsyncAction(
         InsertExamAsyncAction,
         {},
@@ -72,9 +72,9 @@ export const ExamInsert = ({studyplan, onDone}) => {
                     examId: examResult.id
                 };
                 await fetchInsert(insertParams);
-                alert("Zkouška přidána!");
+                //alert("Zkouška přidána!");
                 setName("");
-                onDone?.();
+                onDone();
             } else {
                 alert("Zkoušku se nepodařilo vytvořit.");
                 // Výpis detailní chyby:

@@ -66,7 +66,7 @@ export const StudyPlanLessonDelete = ({ lesson, onDeleted }) => {
   
       deleteLesson({ id: lesson.id, lastchange: lesson.lastchange })
         .then(() => {
-          alert(`Lekce '${lesson.name}' byla smazána.`);
+          //alert(`Lekce '${lesson.name}' byla smazána.`);
           onDeleted?.(lesson.id); // zavolej callback pro rodiče
         })
         .catch((err) => {

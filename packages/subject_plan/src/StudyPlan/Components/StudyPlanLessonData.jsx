@@ -51,7 +51,7 @@ fragment StudyPlanLesson on StudyPlanLessonGQLModel {
   }
 }`)
 
-export const StudyPlanLessonData = ({studyplan}) => {
+export const StudyPlanLessonData = ({studyplan, onDone = () => {}}) => {
   const { fetch: fetchInsert, loading, error } = useAsyncAction(
     InsertStudyPlanLessonAsyncAction,
     {},
@@ -74,8 +74,9 @@ export const StudyPlanLessonData = ({studyplan}) => {
     fetchInsert(insertParams )
       .then((json) => {
         console.log("Lekce vytvořena:", json);
-        alert("Lekce vytvořena!");
+        //alert("Lekce vytvořena!");
         setName("");
+        onDone(); // volání callbacku pro aktualizaci UI
         
         
         // TODO: doplnit třeba refetch dat nebo dispatch update

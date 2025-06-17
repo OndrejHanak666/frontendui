@@ -120,7 +120,7 @@ export const StudentEvaluationInsert = ({ examId, programId, onDone }) => {
         });
         console.log("Výsledek insertEvaluation:", evaluationResult);
         if (evaluationResult?.id) {
-          alert("Evaluation úspěšně vytvořena!");
+          //alert("Evaluation úspěšně vytvořena!");
           onDone?.(evaluationResult);
           setPattern("");
           setSelectedUser(null);

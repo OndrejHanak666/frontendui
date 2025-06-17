@@ -34,7 +34,7 @@ const LocalFacility = ({facility, onSelect}) => {
 }
 
 
-export const FacilitiesInsert = ({ onChoose }) => {
+export const FacilitiesInsert = ({ lesson, onChoose }) => {
     const {loading, error, fetch} = useAsyncAction(
         InsertFacilityAsyncAction,
         {},
@@ -50,8 +50,14 @@ export const FacilitiesInsert = ({ onChoose }) => {
     const [delayer, setDelayer] = useState(() => CreateDelayer(500)); 
 
     const onSelect = async (facility) => {
-        console.log("onSelect", facility.id, facility.name)
-        onChoose(facility, fetchFacilityUpdate);
+        console.log("Přidávám do mutace:", {
+            planitemId: lesson.id,
+            facilityId: facility.id,
+            lesson,
+            facility
+        });
+        await fetchFacilityUpdate({ planitemId: lesson.id, facilityId: facility.id });
+        onChoose(facility);
         setFacilities([]);
     }
 

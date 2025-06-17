@@ -9,6 +9,7 @@ import { StudyplanRouterSegment } from "../../../packages/subject_plan/src/Study
 
 import { StudyplanPage } from "../../../packages/subject_plan/src/StudyPlan/Pages/StudyplanPage";
 import { DataGeneratorPage } from "../../../packages/subject_plan/src/Data/Pages/DataGeneratorPage";
+import { StudyplanReadOnlyPage } from "../../../packages/subject_plan/src/StudyPlan/Pages/StudyPlanReadOnlyPage";
 
 
 
@@ -24,6 +25,11 @@ export const Routes = [
     {
         path: `${prefix}/studyplan/edit/:id`,
         element: <StudyplanPage/>
+    },
+
+    {
+        path: `${prefix}/studyplan/view/:id`,
+        element: <StudyplanReadOnlyPage/>
     }
     
 ]
