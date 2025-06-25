@@ -67,7 +67,7 @@ import { EvaluationMediumEditableContent } from "./EvaluationMediumEditableConte
  *
  * @returns {JSX.Element} The dynamically selected button component for the specified operation.
  */
-export const EvaluationButton = ({ operation, children, evaluation, onDone = () => {}, ...props }) => {
+export const EvaluationButton = ({ operation, children, evaluation, onDone = () => {}, readOnly, ...props }) => {
     const operationConfig = {
         C: {
             asyncAction: EvaluationInsertAsyncAction,
@@ -129,6 +129,10 @@ export const EvaluationButton = ({ operation, children, evaluation, onDone = () 
     // Validate required fields for "U" and "D"
     if ((operation === 'U' || operation === 'D') && !evaluation?.id) {
         return <ErrorHandler errors={`For '${operation}' operation, 'evaluation' must include an 'id' key.`} />;
+    }
+
+    if (readOnly) {
+        return null; // In readOnly mode, do not show the button
     }
 
     return (<>

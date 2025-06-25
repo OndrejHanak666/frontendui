@@ -40,7 +40,7 @@ const LocalGroup = ({group, onSelect}) => {
 
 
 
-export const StudyGroupInsert = ({onChoose}) => {
+export const StudyGroupInsert = ({onChoose, readOnly}) => {
   const {loading, error, fetch} = useAsyncAction(
     QueryGroupAsyncAction,
     {},
@@ -79,6 +79,10 @@ export const StudyGroupInsert = ({onChoose}) => {
       setGroups([]);
     }
    }
+
+  if (readOnly) {
+    return null; // Pokud je readOnly, nic nezobrazíme
+  }
 
   return (
         <div ref={inputRef}

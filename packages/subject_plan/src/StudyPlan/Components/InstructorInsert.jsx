@@ -41,7 +41,7 @@ const LocalInstructor = ({ user, onSelect }) => {
     )
 }
 
-export const InstructorInsert = ({onChoose}) => {
+export const InstructorInsert = ({onChoose, readOnly}) => {
     const { loading, error, fetch } = useAsyncAction(
         QueryInstructorAsyncAction,
         {},
@@ -76,6 +76,10 @@ export const InstructorInsert = ({onChoose}) => {
         else {
             setUsers([]);
         }
+    }
+    
+    if (readOnly) {
+        return null; // Pokud je readOnly, nic nezobrazíme
     }
 
     return (

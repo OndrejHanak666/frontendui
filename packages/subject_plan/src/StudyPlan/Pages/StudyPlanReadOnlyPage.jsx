@@ -9,7 +9,7 @@ import { StudyplanPageNavbar } from "./StudyplanPageNavbar";
 const StudyplanReadOnlyContent = ({ studyplan }) => (
   <>
     <StudyplanPageNavbar studyplan={studyplan} />
-    <StudyplanLargeCard studyplan={studyplan} readOnly />
+    <StudyplanLargeCard studyplan={studyplan} readOnly={true} />
   </>
 );
 

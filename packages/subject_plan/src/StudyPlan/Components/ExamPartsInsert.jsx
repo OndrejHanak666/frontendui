@@ -19,7 +19,7 @@ const ExamPartCreateAsyncAction = createAsyncGraphQLAction(`mutation MyMutation(
   }
 }`);
 
-export const ExamPartsInsert = ({ examId, onDone = () => {} }) => {
+export const ExamPartsInsert = ({ examId, onDone = () => {} , readOnly}) => {
   const [name, setName] = useState("");
   const { fetch, loading, error } = useAsyncAction(ExamPartCreateAsyncAction, {}, { deferred: true });
 
@@ -29,6 +29,10 @@ export const ExamPartsInsert = ({ examId, onDone = () => {} }) => {
     setName("");
     onDone();
   };
+
+  if (readOnly) {
+    return null;
+  }
 
   return (
     <div className="d-flex align-items-end mb-2" style={{ gap: "0.5rem" }}>

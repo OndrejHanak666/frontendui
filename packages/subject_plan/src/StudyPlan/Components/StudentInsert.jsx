@@ -69,7 +69,7 @@ const LocalStudent = ({ user, onSelect }) => {
 }
 
 
-export const StudentEvaluationInsert = ({ examId, programId, onDone }) => {
+export const StudentEvaluationInsert = ({ examId, programId, onDone, readOnly }) => {
   const [pattern, setPattern] = useState("");
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -138,6 +138,10 @@ export const StudentEvaluationInsert = ({ examId, programId, onDone }) => {
       alert("Chyba při vkládání.");
     }
   };
+
+  if (readOnly) {
+    return null; // V režimu readOnly neukazujeme pole pro přidání
+  }
 
   return (
     <div>

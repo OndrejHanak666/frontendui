@@ -34,7 +34,7 @@ const LocalFacility = ({facility, onSelect}) => {
 }
 
 
-export const FacilitiesInsert = ({ lesson, onChoose }) => {
+export const FacilitiesInsert = ({ lesson, onChoose, readOnly }) => {
     const {loading, error, fetch} = useAsyncAction(
         InsertFacilityAsyncAction,
         {},
@@ -74,6 +74,10 @@ export const FacilitiesInsert = ({ lesson, onChoose }) => {
         } else {
             setFacilities([]);
         }
+    }
+
+    if (readOnly) {
+        return null; // V režimu readOnly neukazujeme pole pro přidání
     }
 
     return (

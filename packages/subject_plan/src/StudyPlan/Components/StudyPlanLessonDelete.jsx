@@ -47,39 +47,40 @@ fragment StudyplanlessonLarge on StudyPlanLessonGQLModel {
   }
 }`)
 
-export const StudyPlanLessonDelete = ({ lesson, onDeleted }) => {
-    const { fetch: deleteLesson, loading, error } = useAsyncAction(
-      DeleteStudyPlanLessonAsyncAction,
-      lesson,
-      { deferred: true }
-    );
+export const StudyPlanLessonDelete = ({ lesson, onDeleted, readOnly }) => {
+  const { fetch: deleteLesson, loading, error } = useAsyncAction(
+    DeleteStudyPlanLessonAsyncAction,
+    lesson,
+    { deferred: true }
+  );
   
-    const handleDelete = () => {
-      console.log("Kliknutí na smazat"); // => má se vždy vypsat
-      console.log("lesson", lesson);
-      if (!lesson.id || !lesson.lastchange) {
-        alert("Chybí ID nebo lastchange lekce.");
-        return;
-      }
+  const handleDelete = () => {
+    console.log("Kliknutí na smazat"); // => má se vždy vypsat
+    console.log("lesson", lesson);
+    if (!lesson.id || !lesson.lastchange) {
+      alert("Chybí ID nebo lastchange lekce.");
+      return;
+    }
 
-      console.log("deleteLesson", deleteLesson);
-  
-      deleteLesson({ id: lesson.id, lastchange: lesson.lastchange })
-        .then(() => {
-          //alert(`Lekce '${lesson.name}' byla smazána.`);
-          onDeleted?.(lesson.id); // zavolej callback pro rodiče
-        })
-        .catch((err) => {
-          console.error("Chyba při mazání lekce", err);
-          alert("Mazání selhalo");
-        });
-    };
-  
-    return (
-      <li className="mb-2">
-        <div className="d-flex justify-content-between align-items-center">
-          <span>{lesson.name}</span>
-          <pre style={{display:"none"}}>{JSON.stringify(lesson)}</pre>
+    console.log("deleteLesson", deleteLesson);
+    
+    deleteLesson({ id: lesson.id, lastchange: lesson.lastchange })
+      .then(() => {
+        //alert(`Lekce '${lesson.name}' byla smazána.`);
+        onDeleted?.(lesson.id); // zavolej callback pro rodiče
+      })
+      .catch((err) => {
+        console.error("Chyba při mazání lekce", err);
+        alert("Mazání selhalo");
+      });
+  };
+
+  return (
+    <div className="mb-2">
+      <div className="d-flex justify-content-between align-items-center">
+        <span>{lesson.name}</span>
+        <pre style={{display:"none"}}>{JSON.stringify(lesson)}</pre>
+        {!readOnly && (
           <button
             className="btn btn-sm btn-danger"
             onClick={handleDelete}
@@ -87,9 +88,10 @@ export const StudyPlanLessonDelete = ({ lesson, onDeleted }) => {
           >
             Smazat
           </button>
-        </div>
-        {error && <div style={{ color: "red" }}>{error.message}</div>}
-      </li>
-    );
-  };
+        )}
+      </div>
+      {error && <div style={{ color: "red" }}>{error.message}</div>}
+    </div>
+  );
+};
 

@@ -51,7 +51,7 @@ fragment StudyPlanLesson on StudyPlanLessonGQLModel {
   }
 }`)
 
-export const StudyPlanLessonData = ({studyplan, onDone = () => {}}) => {
+export const StudyPlanLessonData = ({studyplan, onDone = () => {}, readOnly }) => {
   const { fetch: fetchInsert, loading, error } = useAsyncAction(
     InsertStudyPlanLessonAsyncAction,
     {},
@@ -87,21 +87,25 @@ export const StudyPlanLessonData = ({studyplan, onDone = () => {}}) => {
       });
   };
 
+  // Pokud je readOnly, nezobrazuj input ani tlačítko
+  if (readOnly) return null;
+
   return (
-    <div>
-      <h3>Vytvořit novou lekci</h3>
+    <div className="d-flex align-items-end mb-2" style={{ gap: "0.5rem" }}>
       <input
         className="form-control"
         type="text"
         placeholder="Název lekce"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        disabled={loading}
+        disabled={readOnly}
+        style={{ maxWidth: 400 }}
       />
       <button
-        className="btn btn-primary mt-2"
+        className="btn btn-primary"
         onClick={onCreate}
-        disabled={loading || !name.trim()}
+        disabled={readOnly || !name.trim()}
+        type="button"
       >
         Vytvořit lekci
       </button>

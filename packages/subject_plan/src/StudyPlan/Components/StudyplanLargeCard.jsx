@@ -47,9 +47,9 @@ import { ExamPartsInsert } from "./ExamPartsInsert"
  */
 
 
-export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) => {
+export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur, readOnly }) => {
     const [expandedLessonIndex, setExpandedLessonIndex] = useState(null);
-    const [expandedEvaluationIndex, setExpandedEvaluationIndex] = useState(null);
+    
 
     const toggleLesson = (index) => {
         setExpandedLessonIndex(prevIndex => prevIndex === index ? null : index);
@@ -65,7 +65,7 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                 </LeftColumn>
                 <MiddleColumn>
                     <h3>Obsah studijního plánu</h3>
-                    <StudyPlanLessonData studyplan={studyplan} onDone={() => onBlur({ target: { value: studyplan } })} />
+                    <StudyPlanLessonData studyplan={studyplan} onDone={() => onBlur({ target: { value: studyplan } })} readOnly={readOnly} />
 
                     {studyplan.lessons && studyplan.lessons.length > 0 ? (
                         <div className="list-group">
@@ -76,7 +76,7 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                                         onClick={() => toggleLesson(index)}
                                     >
                                         
-                                        <StudyPlanLessonDelete lesson={lesson} onDeleted={() => onBlur({ target: { value: studyplan } })} />
+                                        <StudyPlanLessonDelete lesson={lesson} onDeleted={() => onBlur({ target: { value: studyplan } })} readOnly={readOnly} />
                                     </div>
                                     {expandedLessonIndex === index && (
                                         <div style={{ marginTop: "10px", paddingLeft: "10px" }}>
@@ -96,7 +96,8 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
 
                                                         fetchLessonUpdate(LessonUpdateParams);
                                                         onBlur({ target: { value: studyplan } })
-                                                    }} />
+                                                    }}
+                                                    readOnly={readOnly} />
 
                                                     <ListGroup>
                                                         {lesson.instructors?.map(instr => (
@@ -109,6 +110,7 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                                                                 lesson={lesson}
                                                                 user={instr}
                                                                 onInstructorRemoved={() => onBlur({ target: { value: studyplan } })}
+                                                                readOnly={readOnly}
                                                             />
                                                             </ListGroup.Item>
                                                         ))}
@@ -124,6 +126,7 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                                                     <FacilitiesInsert
                                                       lesson={lesson}
                                                       onChoose={() => onBlur({ target: { value: studyplan } })}
+                                                      readOnly={readOnly}
                                                     />
 
                                                     <ListGroup>
@@ -138,6 +141,7 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                                                                 lesson={lesson}
                                                                 facility={facility}
                                                                 onFacilityRemoved={() => onBlur({ target: { value: studyplan } })}
+                                                                readOnly={readOnly}
                                                             />                      
                                                           </ListGroup.Item>
                                                         ))
@@ -163,6 +167,7 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                                                     fetchGroupUpdate(GroupUpdateParams);
                                                     onBlur({ target: { value: studyplan } });
                                                   }}
+                                                  readOnly={readOnly}
                                                 />
 
                                                 <ListGroup>
@@ -174,6 +179,7 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                                                           lesson={lesson}
                                                           group={group}
                                                           onGroupRemoved={() => onBlur({ target: { value: studyplan } })}
+                                                          readOnly={readOnly}
                                                         />
                                                       </ListGroup.Item>
                                                     ))
@@ -199,7 +205,7 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                     {children}
 
                     <div className="mt-4">
-                      <ExamInsert studyplan={studyplan} onDone={() => onBlur({ target: { value: studyplan } })} />
+                      <ExamInsert studyplan={studyplan} onDone={() => onBlur({ target: { value: studyplan } })} readOnly={readOnly} />
                     </div>
 
                     <Card className="mt-4">
@@ -207,7 +213,7 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                         <div className="d-flex align-items-center justify-content-between mb-2">
                           <Card.Title className="mb-0">Klasifikace</Card.Title>
                           {studyplan.exam?.id && (
-                            <ExamButton className = "btn btn-outline-success" operation="U" exam={studyplan.exam} onDone={() => onBlur({ target: { value: studyplan } })}>
+                            <ExamButton className = "btn btn-outline-success" operation="U" exam={studyplan.exam} onDone={() => onBlur({ target: { value: studyplan } })} readOnly={readOnly}>
                               Upravit
                             </ExamButton>
                           )}
@@ -235,6 +241,7 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                                 <ExamPartsInsert
                                   examId={studyplan.exam.id}
                                   onDone={() => onBlur({ target: { value: studyplan } })}
+                                  readOnly={readOnly}
                                 />
                               )}
                               {Array.isArray(studyplan.exam.parts) && studyplan.exam.parts.length > 0 ? (
@@ -252,6 +259,7 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                                           operation="U"
                                           exam={part}
                                           onDone={() => onBlur({ target: { value: studyplan } })}
+                                          readOnly={readOnly}
                                         >
                                           Upravit část
                                         </ExamButton>
@@ -277,6 +285,7 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                           examId={studyplan.exam.id}
                           programId={studyplan.semester.subject.program.id}
                           onDone={() => onBlur({ target: { value: studyplan } })}
+                          readOnly={readOnly}
                         />
                       )}
                     </div>
@@ -314,8 +323,9 @@ export const StudyplanLargeCard = ({ studyplan, children, onChange, onBlur }) =>
                                         operation="U"
                                         evaluation={evalItem}
                                         onDone={() => onBlur({ target: { value: studyplan } })}
+                                        readOnly={readOnly}
                                       >Upravit</EvaluationButton>
-                                    <EvaluationDeleteButton evaluation={evalItem} onDone={() => onBlur({ target: { value: studyplan } })}/>
+                                    <EvaluationDeleteButton evaluation={evalItem} onDone={() => onBlur({ target: { value: studyplan } })} readOnly={readOnly}/>
                                   </div>
                                 </Card.Body>
                               </Card>

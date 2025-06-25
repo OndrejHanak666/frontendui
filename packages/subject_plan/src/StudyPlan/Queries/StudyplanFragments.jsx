@@ -42,13 +42,8 @@ fragment StudyplanLarge on StudyPlanGQLModel {
     name
     id
     lastchange
-    order
     length
     lessontypeId
-    event {
-      startdate
-      enddate
-    }
     instructors {
       id
       name
