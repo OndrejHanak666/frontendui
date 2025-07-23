@@ -59,6 +59,10 @@ export const FacilitiesInsert = ({ lesson, onChoose, readOnly }) => {
         await fetchFacilityUpdate({ planitemId: lesson.id, facilityId: facility.id });
         onChoose(facility);
         setFacilities([]);
+        // Vyprázdni input po výběru
+        if (inputRef.current) {
+            inputRef.current.value = "";
+        }
     }
 
     const onChange = (e) => {
@@ -98,6 +102,7 @@ export const FacilitiesInsert = ({ lesson, onChoose, readOnly }) => {
                 onChange={onChange}
                 className="form-control"
                 placeholder="Zadejte název místnosti"
+                ref={inputRef}
             />
             {facilities &&
                 facilities.map((facility) => (

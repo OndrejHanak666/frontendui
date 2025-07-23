@@ -4,9 +4,9 @@ import { CreateDelayer } from "@hrbolek/uoisfrontend-shared";
 
 
 const InsertStudyPlanLessonAsyncAction = createAsyncGraphQLAction(
-    `mutation MyMutation($planId: UUID!, $topicId: UUID!, $lessontypeId: UUID!, $id: UUID, $name: String, $length: Int) {
+    `mutation MyMutation($planId: UUID!, $topicId: UUID!, $lessontypeId: UUID!, $id: UUID, $name: String, $length: Int, $eventId: UUID!) {
   studyPlanLessonInsert(
-    studyPlanLesson: {lessontypeId: $lessontypeId, planId: $planId, topicId: $topicId, id: $id, name: $name, length: $length}
+    studyPlanLesson: {lessontypeId: $lessontypeId, planId: $planId, topicId: $topicId, id: $id, name: $name, length: $length, eventId: $eventId}
   ) {
     __typename
     ...Error
@@ -69,6 +69,7 @@ export const StudyPlanLessonData = ({studyplan, onDone = () => {}, readOnly }) =
       planId: studyplan.id,//"8bde6144-7b82-46d1-ba38-aaab9fa54191",
       topicId: "ef1c48b7-4f65-4696-b89f-a95c2cf8814f",
       lessontypeId: "e2b7cbf6-95e1-11ed-a1eb-0242ac120002",
+      eventId: crypto.randomUUID(), // pokud je potřeba, jinak může být undefined
     };
 
     fetchInsert(insertParams )

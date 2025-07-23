@@ -43,6 +43,10 @@ fragment StudyplanLarge on StudyPlanGQLModel {
     id
     lastchange
     length
+    event {
+      startdate
+      enddate
+    }
     lessontypeId
     instructors {
       id
@@ -85,6 +89,12 @@ fragment StudyplanLarge on StudyPlanGQLModel {
       passed
       studentId
       lastchange
+      student {
+        student {
+          name
+          surname
+        }
+      }
     }
   }
     

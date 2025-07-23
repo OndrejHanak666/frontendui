@@ -60,6 +60,9 @@ export const InstructorInsert = ({onChoose, readOnly}) => {
     const onSelect = async (user) => {
         onChoose(user, fetchLessonUpdate);
         setUsers([]);
+        if (inputRef.current) {
+            inputRef.current.value = ""; // Vyprázdní input
+        }
     }
     const onChange = (e) => {
         const data = e.target.value;
@@ -100,6 +103,7 @@ export const InstructorInsert = ({onChoose, readOnly}) => {
                 onChange={onChange}
                 className="form-control"
                 placeholder="Zadejte jméno instruktora"
+                ref={inputRef}
             />
             {users &&
                 users.map((user) => {

@@ -61,6 +61,9 @@ export const StudyGroupInsert = ({onChoose, readOnly}) => {
     console.log("onSelect", group.id, group.name)
     onChoose(group, fetchGroupUpdate);
         setGroups([]);
+        if (inputRef.current) {
+        inputRef.current.value = "";
+    }
   }
 
    const onChange = (e) => {
@@ -102,6 +105,7 @@ export const StudyGroupInsert = ({onChoose, readOnly}) => {
             onChange={onChange}
             className="form-control"
             placeholder="Zadejte název skupiny"
+            ref={inputRef}
           />
           {groups &&
             groups.map((group) => {
