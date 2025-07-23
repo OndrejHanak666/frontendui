@@ -1,4 +1,5 @@
-import { ProgramManagement } from "../Components";
+import { FacilitiesInsert } from "../../StudyPlan/Components/FacilitiesInsert";
+import { FacilityGenerator, ProgramManagement } from "../Components";
 import { SubjectManagement } from "../Components";
 import { StudyPlanGenerator } from "../Components";
 
@@ -7,9 +8,7 @@ export const DataGeneratorPage = () => {
     <div>
       <h1>Data Generator Page</h1>
       <p>This page is for generating data.</p>
-      <ProgramManagement />
-      <SubjectManagement />
-      <StudyPlanGenerator />
+      <FacilityGenerator />
     </div>
   );
 }

@@ -101,10 +101,14 @@ export const EvaluationButton = ({ operation, children, evaluation, onDone = () 
 
     const { error, loading, fetch, entity } = useAsyncAction(asyncAction, evaluation, { deferred: true });
     const handleClick = async (params = {}) => {
+        console.log("handleClick params:", params); // <-- přidej tento řádek
         const parseNumber = (val) => {
             const num = parseInt(val, 10);
             return !isNaN(num) ? num : undefined;
         };
+        const allowedGrades = ["A", "B", "C", "D", "E", "F"];
+        const gradeValue = allowedGrades.includes(params.grade) ? params.grade : undefined;
+        console.log("gradeValue:", gradeValue); // <-- přidej tento řádek
         const fetchParams = {
             ...evaluation,
             ...params,
@@ -121,7 +125,9 @@ export const EvaluationButton = ({ operation, children, evaluation, onDone = () 
                       params.passed === "0"
                     ? false
                     : undefined,
+            grade: gradeValue,
         };
+        console.log("fetchParams:", fetchParams); // <-- přidej tento řádek
         const freshEvaluation = await fetch(fetchParams);
         onDone(freshEvaluation);
     };

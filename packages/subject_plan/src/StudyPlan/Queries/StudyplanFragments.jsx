@@ -87,6 +87,7 @@ fragment StudyplanLarge on StudyPlanGQLModel {
       id
       points
       passed
+      grade
       studentId
       lastchange
       student {

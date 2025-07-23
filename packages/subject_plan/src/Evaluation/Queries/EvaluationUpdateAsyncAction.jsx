@@ -3,9 +3,9 @@ import { EvaluationLargeFragment } from "./EvaluationFragments";
 
 const EvaluationUpdateMutation = createQueryStrLazy(
 `
-mutation MyMutation($id: UUID!, $lastchange: DateTime!, $points: Int, $passed: Boolean!) {
+mutation MyMutation($id: UUID!, $lastchange: DateTime!, $points: Int, $passed: Boolean!, $grade: String) {
   evaluationUpdate(
-    evaluation: {id: $id, lastchange: $lastchange, points: $points, passed: $passed}
+    evaluation: {id: $id, lastchange: $lastchange, points: $points, passed: $passed, grade: $grade}
   ) {
     __typename
     ... on EvaluationGQLModelUpdateError {
@@ -17,6 +17,7 @@ mutation MyMutation($id: UUID!, $lastchange: DateTime!, $points: Int, $passed: B
         lastchange
         points
         passed
+        grade
       }
     }
   }

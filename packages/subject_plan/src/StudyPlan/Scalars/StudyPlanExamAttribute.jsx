@@ -160,6 +160,9 @@ export const StudyplanExamAttribute = ({ studyplan, onBlur, readOnly }) => (
                       <strong>Body:</strong> {evalItem.points ?? "—"}
                     </ListGroup.Item>
                     <ListGroup.Item>
+                      <strong>Známka:</strong> {evalItem.grade ?? "—"}
+                    </ListGroup.Item>
+                    <ListGroup.Item>
                       <strong>Prošel:</strong>{" "}
                       {evalItem.passed !== undefined ? (evalItem.passed ? "Ano" : "Ne") : "—"}
                     </ListGroup.Item>
