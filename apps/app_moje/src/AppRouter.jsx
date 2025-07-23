@@ -13,7 +13,7 @@ import { StudyplanReadOnlyPage } from "../../../packages/subject_plan/src/StudyP
 
 
 
-const prefix = "/app_moje" 
+const prefix = "/studyplan" 
 export const Routes = [
     
     StudyplanRouterSegment,
