@@ -7,7 +7,7 @@
     "docs": "jsdoc -c jsdoc.json"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "description": "",
   "dependencies": {
     "react-bootstrap-icons": "^1.11.5",
