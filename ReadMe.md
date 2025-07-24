@@ -6,31 +6,85 @@ Monorepo pro správu studijních plánů, aplikací a komponent v Node.js/React.
 
 ## 📦 Hlavní změny a vývoj
 
-- **23.07**  
-  Poslední úpravy a aktualizace projektu.
+1. 4. 2025
+commit 1
+Začátek projektu, první commit.
 
-- **25.06 – ReadOnly page**  
-  Přidána stránka pouze pro čtení (read-only režim).
+3. 4. 2025
+commut 2
+Pokračování na základní struktuře projektu.
 
-- **17.06, 28.05, 27.05**  
-  Průběžné úpravy a vylepšení funkcionality.
+4. 4. 2025
+commit 3
+Další rozvoj projektu.
 
-- **FacilityInsert done**  
-  Dokončena komponenta pro přidávání místností.
+8. 4. 2025
+commit 4
+Průběžné úpravy a vylepšení.
 
-- **Refactor InstructorInsert and Studyplan components**  
-  Refaktoring komponent InstructorInsert a Studyplan, přidána funkce InstructorDelete, vylepšeno zobrazení lekcí s unikátními instruktory a skupinami.
+9. 4. 2025
+commit 5
+Pokračování v implementaci.
 
-- **Update Docker Compose configuration, add new apps, and enhance components in subject_plan package**  
-  Aktualizace Docker Compose, přidání nových aplikací a vylepšení komponent v balíčku subject_plan.
+10. 4. 2025
+commit 6
+Další práce na projektu.
 
-- **Merge commity**  
-  Pravidelné slučování větví s upstreamem a monorepem.
+11. 4. 2025
+commit 7
+Průběžné změny a úpravy.
 
-- **První commity a základní funkce**  
-  První entity, základní komponenty, první šablony a commitovací série.
+16. 4. 2025
+commit 8
+Rozšíření funkcionality.
 
----
+24. 4. 2025
+commit 9
+Další úpravy a vylepšení.
+
+25. 6. 2025
+ReadOnly page 25.06.
+Přidána stránka pro pouze čtení.
+
+27. 5. 2025
+27.05
+Průběžné změny.
+
+28. 5. 2025
+28.05
+Další úpravy.
+
+17. 6. 2025
+17.06
+Práce na projektu pokračuje.
+
+20. 5. 2025
+FacilityInsert done
+Dokončena komponenta pro vkládání zařízení.
+
+23. 7. 2025
+final commit2, Final commit, Generování dokumentace, opraveni, commit, comiit, 23.07
+Finální úpravy, generování dokumentace, opravy a poslední změny před dokončením.
+
+15. 5. 2025
+Refactor InstructorInsert and Studyplan components, add InstructorDelete functionality, and enhance lesson display with unique instructors and groups
+Refaktoring komponent, přidání mazání vyučujících, vylepšení zobrazení lekcí.
+
+15. 5. 2025
+Update Docker Compose configuration, add new apps, and enhance components in subject_plan package
+Aktualizace Docker Compose, přidání nových aplikací a vylepšení komponent.
+
+9. 5. 2025
+commit 11
+Další změny v projektu.
+
+2. 5. 2025
+commit 10
+Průběžné úpravy.
+
+23. 7. 2025
+Update ReadMe.md
+Aktualizace dokumentace.
 
 ## 🚀 Spuštění projektu
 
